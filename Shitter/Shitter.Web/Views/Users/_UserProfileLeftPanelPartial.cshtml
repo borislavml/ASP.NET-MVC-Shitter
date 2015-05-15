@@ -1,0 +1,33 @@
+﻿@model Shitter.Web.Models.Users.UserProfileViewModel
+
+@{
+    ViewBag.UserImage = Model.ImageDataUrl != null ? Model.ImageDataUrl : "/Content/Images/no-image.png";
+}
+
+@*USER-PROFILE-PHOTO*@
+<div class="row">
+    <div class="col-md-8 user-profile-pannel-photo-container">
+        <img src="@ViewBag.UserImage" alt="@Model.UserName avatar" class="img-responsive user-profile-pannel-photo" />
+    </div>
+</div>
+
+@*USER-PROFILE-INFO*@
+<div class="row">
+    <div class="col-md-11 user-profile-panel-info">
+        <h2><strong class="underline-text">@Model.FullName</strong></h2>
+        <div class="user-tag-name underline-text">@@@Model.UserName</div>
+        <p class="user-profil-summary-paragraph">@Model.Summary</p>
+        @if (@Model.Country != null || @Model.Town != null)
+        {
+            <div><span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span>&nbsp;&nbsp;@Model.Town&nbsp;@Model.Country</span></div>
+        } 
+        @if (@Model.Website != null)
+        {
+            <div><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span>&nbsp;&nbsp;<a href="@Model.Website" target="_blank">@Model.Website</a></span></div>
+        }  
+        <div><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span>&nbsp;&nbsp;<a href="mailto:@Model.Email" target="_top">@Model.Email</a></span></div>
+        <div><span class="glyphicon glyphicon-time" aria-hidden="true"></span><span>&nbsp;&nbsp;Joined&nbsp;@Model.RegistrationDate.ToString("MMMM dd, yyyy")</span></div>
+    </div>
+</div>
+
+

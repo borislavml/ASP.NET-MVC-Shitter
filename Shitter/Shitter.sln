@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{3572991B-EC5A-4D6A-8521-3324E386B47A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{F90383E6-4C7C-4682-842A-2180EBDBA999}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{19AADAAD-D1A6-49ED-BCAB-5988B058A979}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{E9B4A4C7-EBD0-4D0F-BB38-E14FE4132695}"
+	ProjectSection(SolutionItems) = preProject
+		External\System.Web.Mvc.Expressions.dll = External\System.Web.Mvc.Expressions.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shitter.Models", "Shitter.Models\Shitter.Models.csproj", "{82DF7A10-6073-46EB-BE84-A35267C9B955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shitter.Data", "Shitter.Data\Shitter.Data.csproj", "{0FF35B2D-4C4F-4CDB-B601-D7C763111BE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shitter.Web", "Shitter.Web\Shitter.Web.csproj", "{85205C71-FC5A-41E0-A7A3-5D7772EEE104}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82DF7A10-6073-46EB-BE84-A35267C9B955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82DF7A10-6073-46EB-BE84-A35267C9B955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82DF7A10-6073-46EB-BE84-A35267C9B955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82DF7A10-6073-46EB-BE84-A35267C9B955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF35B2D-4C4F-4CDB-B601-D7C763111BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF35B2D-4C4F-4CDB-B601-D7C763111BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF35B2D-4C4F-4CDB-B601-D7C763111BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF35B2D-4C4F-4CDB-B601-D7C763111BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85205C71-FC5A-41E0-A7A3-5D7772EEE104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85205C71-FC5A-41E0-A7A3-5D7772EEE104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85205C71-FC5A-41E0-A7A3-5D7772EEE104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85205C71-FC5A-41E0-A7A3-5D7772EEE104}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82DF7A10-6073-46EB-BE84-A35267C9B955} = {3572991B-EC5A-4D6A-8521-3324E386B47A}
+		{0FF35B2D-4C4F-4CDB-B601-D7C763111BE2} = {3572991B-EC5A-4D6A-8521-3324E386B47A}
+		{85205C71-FC5A-41E0-A7A3-5D7772EEE104} = {F90383E6-4C7C-4682-842A-2180EBDBA999}
+	EndGlobalSection
+EndGlobal

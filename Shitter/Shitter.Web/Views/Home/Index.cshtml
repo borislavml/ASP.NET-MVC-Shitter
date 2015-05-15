@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Shitter.Models.User>
+
+<div class="row home-container">
+    @*LEFT SIDE BAR*@
+    <div class="user-panel-container col-md-3">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Partial("_UserLeftPanelPartial")
+        }
+    </div>
+    @*CENTER PAGE WITH SHITTS*@
+    <div  class="home-page-shitts-containter col-md-6">
+        @foreach (var user in Model)
+        {
+            <div class="shitt-div-container">
+                <div class="row shitt-div-heading">
+                    <div class="col-md-3 shittt-user-photo-container">
+                        <img src="@user.ImageDataUrl" class="img-responsive shittt-user-photo" />
+                    </div>
+                    <div class="col-md-9 shittt-user-info-container">
+                        <span class=""><strong>@user.FullName</strong></span>
+                        <span class="shitt-owner-name ">@@@user.UserName</span>
+                    </div>
+                </div>
+                <div class="row shitt-div-content">
+                </div>
+            </div>
+        }
+        @*PAGINATION*@
+        <div class="center">
+            @Html.PagedListPager(Model, id => Url.Action("Index", new { id }))
+        </div>
+    </div>
+    @*RIGHT SIDE BAR*@
+    <div class="left-panel-container col-md-3">
+        @Html.Partial("_RightSidePanelPartial")
+    </div>
+</div>
+
+
+
+
+

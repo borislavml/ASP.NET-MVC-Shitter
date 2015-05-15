@@ -1,0 +1,38 @@
+﻿
+@model Shitter.Web.Models.Users.UserProfileViewModel
+
+
+<div class="row user-profile-page-container">
+    @*LEFT SIDE BAR*@
+    <div  class="user-panel-container col-md-3">
+        @Html.Partial("_UserProfileLeftPanelPartial")
+    </div>
+    @*CENTER PAGE WITH SHITTS*@
+    <div class="home-page-shitts-containter col-md-6">
+        @foreach (var shitt in Model.PostedShitts)
+        {
+            <div class="shitt-div-container">
+                <div class="row shitt-div-heading">
+                    <div class="col-md-3 shittt-user-photo-container">
+                        <img src="@Model.ImageDataUrl" class="img-responsive shittt-user-photo" />
+                    </div>
+                    <div class="col-md-9 shittt-user-info-container">
+                        <span class=""><strong><a href="/users/@shitt.OwnerUsername" class="black-text-link">@shitt.OwnerName</a></strong></span>
+                        <span class="user-tag-name">@@@shitt.OwnerUsername</span>
+                        <span class="shitt-date">@shitt.CreatedOn.ToString("hh:mm MMM dd, yyyy")</span>
+                        <div class="shitt-div-content">
+                           <p class="shitt-content-paragraph"> @shitt.Content</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+    @*RIGHT SIDE BAR*@
+    <div class="col-md-3 left-panel-container">
+    </div>
+</div>
+
+
