@@ -31,7 +31,7 @@
             var user= this.Data.Users.All()
                 .Include(u => u.PostedShitts)
                 .Where(u => u.UserName == username)
-                .Select(UserProfileViewModel.ViewModel)
+                .Select(UserProfileViewModel.ViewModel)   
                 .FirstOrDefault();
 
             if (user == null)

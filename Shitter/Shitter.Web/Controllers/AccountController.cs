@@ -90,7 +90,7 @@
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Wrong email or password.");
+                    ModelState.AddModelError("", "Invalid username or password.");
                     return View(model);
             }
         }
@@ -166,11 +166,6 @@
                 // upload image if existing
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
-                    //var stream = model.ImageDataUrl.InputStream;
-                    //byte[] fileBytes = new byte[stream.Length];
-                    //int byteCount = stream.Read(fileBytes, 0, (int)stream.Length);
-                    //string fileContent = Convert.ToBase64String(fileBytes);
-
                     string base64String = this.ConvertImageToBase64String(model.ImageDataUrl);
                     user.ImageDataUrl = base64String;
                 }
@@ -186,7 +181,7 @@
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "Home");
                 }
 
                 AddErrors(result);
@@ -489,7 +484,7 @@
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

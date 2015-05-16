@@ -1,8 +1,17 @@
 ﻿@model Shitter.Web.Models.Shitts.ShittViewModel 
 
-<div>
-    <strong>
-        @Model.Content
-    </strong>
+<div class="shitt-div-container">
+    <div class="row shitt-div-heading">
+        <div class="col-md-3 shittt-user-photo-container">
+            <img src="@Model.OwnerImageDataUrl" class="img-responsive shittt-user-photo" />
+        </div>
+        <div class="col-md-9 shittt-user-info-container">
+            <span class=""><strong><a href="/users/@Model.OwnerUsername" class="black-text-link">@Model.OwnerName</a></strong></span>
+            <span class="user-tag-name">@@@Model.OwnerUsername</span>
+            <span class="shitt-date">@Model.CreatedOn.ToString("hh:mm MMM dd, yyyy")</span>
+            <div class="shitt-div-content">
+                <p class="shitt-content-paragraph"> @Model.Content</p>
+            </div>
+        </div>
+    </div>
 </div>
-

@@ -1,28 +1,24 @@
 ﻿@using Microsoft.AspNet.Identity;
 @*@using PagedList.Mvc;
-@model PagedList.IPagedList<Shitter.Models.User>*@
+    @model PagedList.IPagedList<Shitter.Models.User>*@
 @model  IEnumerable<Shitter.Web.Models.Shitts.ShittViewModel>
 
 <div class="row home-container">
     @*LEFT SIDE BAR*@
     <div class="user-panel-container col-md-3">
+        @Html.Partial("_UserLeftPanelPartial", (Shitter.Models.User) ViewBag.CurrentUser)
     </div>
     @*CENTER PAGE WITH SHITTS*@
-    <div  class="home-page-shitts-containter col-md-6">
-            @Html.DisplayForModel()
-    
+    <div class="home-page-shitts-containter col-md-6">
+        @Html.DisplayForModel()
+
         @*PAGINATION*@
         @*<div class="center">
-            @Html.PagedListPager(Model, id => Url.Action("Index", new { id }))
-        </div>*@
+                @Html.PagedListPager(Model, id => Url.Action("Index", new { id }))
+            </div>*@
     </div>
     @*RIGHT SIDE BAR*@
     <div class="left-panel-container col-md-3">
         @Html.Partial("_RightSidePanelPartial")
     </div>
 </div>
-
-
-
-
-

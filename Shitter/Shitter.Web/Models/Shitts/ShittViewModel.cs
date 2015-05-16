@@ -19,9 +19,11 @@
                     Content = x.Content,
                     CreatedOn = x.CreatedOn,
                     Reshitts = x.Reshitts,
+                    OwnerImageDataUrl = x.Owner.ImageDataUrl == null ? "/Content/Images/no-image.png" : x.Owner.ImageDataUrl,
                     OwnerUsername = x.Owner.UserName,
                     OwnerName = x.Owner.FullName,
                     OwnerId = x.Owner.Id,
+                    FavoureitesCount = x.UsersFavourite.Count,
 
                 };
             }
@@ -38,10 +40,14 @@
 
         public string OwnerUsername { get; set; }
 
+        public string OwnerImageDataUrl { get; set; }
+
         public string OwnerName { get; set; }
 
         public string OwnerId { get; set; }
 
-        //public  IEnumerable<User> UsersFavourite { get; set; }    
+        public int FavoureitesCount { get; set; }
+
+        //public  IEnumerable<User> UsersFavourite { get; set; }   
     }
 }

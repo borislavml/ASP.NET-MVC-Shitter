@@ -1,4 +1,39 @@
-﻿@using Microsoft.AspNet.Identity;
+﻿@model Shitter.Models.User
 
-<h2>@User.Identity.GetUserName();</h2> 
+@{
+    ViewBag.UserImage = Model.ImageDataUrl != null ? Model.ImageDataUrl : "/Content/Images/no-image.png";
+}
+
+<div class="row">
+    <div class="col-md-11 user-left-panel-div">
+        <div class="row blue-semi-div"></div>
+        <div class="row user-left-panel-info">
+            <div class="col-md-4 user-left-pannel-photo-container">
+                <img src="@ViewBag.UserImage" alt="@Model.UserName avatar" class="img-responsive user-left-pannel-photo" />
+            </div>
+            <div class="col-md-7">
+                <h4><strong class="underline-text">@Model.FullName</strong></h4>
+                <div class="user-tag-name underline-text">@@@Model.UserName</div>
+            </div>
+            <div class="col-md-12 user-shitts-following-info">
+                <div class="col-md-4">
+                    <div class="shitts-folloers-following-headings">Shitts</div>
+                    <div class="user-info-counts">@Model.PostedShitts.Count</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="shitts-folloers-following-headings">Following</div>
+                    <div class="user-info-counts">@Model.Following.Count</div> 
+                </div>
+                <div class="col-md-4">
+                    <div class="shitts-folloers-following-headings">Followers</div>
+                    <div class="user-info-counts">@Model.Followers.Count</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
 

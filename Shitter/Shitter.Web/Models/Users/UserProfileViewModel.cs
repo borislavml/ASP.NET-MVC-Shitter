@@ -20,14 +20,16 @@
                     Id = x.Id,
                     UserName = x.UserName,
                     FullName = x.FullName,
-                    ImageDataUrl = x.ImageDataUrl,
+                    ImageDataUrl = x.ImageDataUrl == null ? "/Content/Images/no-image.png" : x.ImageDataUrl,
                     Email = x.Email,
                     Country = x.Country,
                     Town = x.Town,
                     Summary = x.Summary,
                     Website = x.Website,
                     RegistrationDate = x.RegistrationDate,
-                    PostedShitts = x.PostedShitts.AsQueryable().Select(ShittViewModel.ViewModel),
+                    PostedShitts = x.PostedShitts.AsQueryable()
+                        .Select(ShittViewModel.ViewModel)
+                        .OrderByDescending(s => s.CreatedOn)
                 };
             }
         }
