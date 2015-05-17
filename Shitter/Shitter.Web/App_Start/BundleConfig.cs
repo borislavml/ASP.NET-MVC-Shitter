@@ -24,7 +24,9 @@ namespace Shitter.Web
                       "~/Scripts/respond.js"));
             // custom script for file-uploads
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                       "~/Scripts/file-upload.js"));
+                       "~/Scripts/file-upload.js", 
+                       "~/Scripts/text-area-expand.js",
+                       "~/Scripts/back-to-top.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

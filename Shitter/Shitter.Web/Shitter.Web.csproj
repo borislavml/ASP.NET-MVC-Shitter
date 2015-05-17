@@ -222,6 +222,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Shitts\PostShitViewModel.cs" />
     <Compile Include="Models\Shitts\ShittViewModel.cs" />
     <Compile Include="Models\Users\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -241,6 +242,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
+    <Content Include="Scripts\back-to-top.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -268,6 +270,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\text-area-expand.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -309,6 +312,8 @@
     <Content Include="Views\Shared\DisplayTemplates\ShittViewModel.cshtml" />
     <Content Include="Views\Users\_UserProfileLeftPanelPartial.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\_UserPostShittPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

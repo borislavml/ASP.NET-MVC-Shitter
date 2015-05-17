@@ -49,12 +49,12 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ImageDataUrl, new { @class = "col-md-4 control-label" })
-        <div class="col-md-8 input-group">
+        <div class="col-md-8 input-group upload-image-input-div">
             @*@Html.TextBoxFor(m => m.ImageDataUrl, new { @class = "form-control", type = "file" })*@
             <span class="input-group-btn">
                 <span class="btn btn-info btn-file">
                     Browse
-                    <input type="file" name="ImageDataUrl" id="ImageDataUrl" onchange="readURL(this);" />
+                    <input type="file" name="ImageDataUrl" class="ImageDataUrl" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png, image/jpg" />
                 </span>
             </span>
             <input type="text" class="form-control image-title" readonly="" id="profile-picure" value="" />
@@ -67,7 +67,7 @@
     </div>
     <div class="form-group ">
         <div class="col-md-4 center">
-            <input type="submit" class="btn btn-success" value="Register" />
+            <input type="submit" class="btn btn-primary" value="Register" />
         </div>
     </div>
 }

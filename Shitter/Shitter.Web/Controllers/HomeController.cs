@@ -17,48 +17,48 @@
 
     public class HomeController : BaseController
     {
+        private const int PAGE_SIZE = 10;
+
         public HomeController(IShiterData data)
             : base(data)
         {
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             if (this.UserProfile != null)
             {
                 return this.RedirectToAction("Dashboard", "Home");
             }
 
-
-            //int pageSize = 5;
-            //int shittsFromDb = id - 1;
-
             var shitts = this.Data.Shitts.All()
                 .Select(ShittViewModel.ViewModel)
-                .OrderByDescending(s => s.CreatedOn)
-                .ToList();
+                .OrderByDescending(s => s.CreatedOn);
 
-            // PagedList<User> model = new PagedList<User>(shittsList, id, pageSize);
-            return this.View(shitts);
+            int pageSize = PAGE_SIZE;
+            int pageNumber = page ?? 1;
 
+            PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(shitts, pageNumber, pageSize);
+            return this.View(model);
         }
 
         [Authorize]
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(int? page)
         {
             var currentUser = this.UserProfile;
             ViewBag.CurrentUser = currentUser;
+            ViewBag.UserImage = (currentUser.ImageDataUrl != null) ? currentUser.ImageDataUrl : "/Content/Images/no-image.png";
 
             // get user's following list names 
             List<string> userFollowing = this.UserProfile.Following.Select(f => f.UserName).ToList();
             userFollowing.Add(currentUser.UserName);
 
             // get shitts owned by user's following
-            var matches = (from shitt in this.Data.Shitts.All()
+            var matches = from shitt in this.Data.Shitts.All()
                            where userFollowing.Contains(shitt.Owner.UserName)         
                            orderby shitt.CreatedOn descending
-                           select shitt).ToList();
+                           select shitt;
 
             // cast matches to ShittViewModel
             IEnumerable<ShittViewModel> shitts = matches.Select( match => new ShittViewModel()
@@ -75,7 +75,48 @@
                          FavoureitesCount = match.UsersFavourite.Count,
                      });
 
-            return this.View(shitts);
+            int pageSize = PAGE_SIZE;
+            int pageNumber = page ?? 1;
+
+            PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(shitts, pageNumber, pageSize);
+            return this.View(model);
+        }
+
+        // POST: /Home/PostShitt
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostShitt(PostShitViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var shitt = new Shitt
+                {
+                    Content = model.Content,
+                    OwnerId = this.UserProfile.Id,    
+                    CreatedOn = DateTime.Now,
+                };
+
+                // upload image if existing
+                if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
+                {
+                    string base64String = this.ConvertImageToBase64String(model.ImageDataUrl);
+                    shitt.ImageDataUrl = base64String;
+                }
+
+                try
+                {
+                    this.UserProfile.PostedShitts.Add(shitt);
+                    this.Data.Shitts.Add(shitt);
+                    this.Data.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return this.RedirectToAction("Error", "Home");             
+                }           
+            }
+
+            return this.RedirectToAction("Dashboard", "Home");
         }
 
         [HttpGet]
@@ -89,6 +130,13 @@
         public ActionResult NotFound()
         {
             ViewBag.Message = "Sory, this page doesn't exist!";
+            return this.View();
+        }
+
+        [HttpGet]
+        public ActionResult Error()
+        {
+            ViewBag.Message = "Ooops, sorry something went wrong!";
             return this.View();
         }
     }

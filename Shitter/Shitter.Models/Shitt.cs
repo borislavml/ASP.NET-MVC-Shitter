@@ -30,7 +30,8 @@
         public string ImageDataUrl { get; set; }
 
         [Required]
-        [MaxLength(2000, ErrorMessage = "Message should be between 1 and 2000 charachters.")]
+        [MinLength(2)]
+        [MaxLength(300)]
         public string Content { get; set; }
 
         [Required]

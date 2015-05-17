@@ -1,0 +1,29 @@
+﻿@model Shitter.Web.Models.Shitts.PostShitViewModel
+
+<div class="post-shitt-div">
+    <div class="row">
+        <div class="col-md-3 post-shittt-user-photo-container">
+            <img src="@ViewData["image"]" class="img-responsive shittt-user-photo" />
+        </div>
+        @using (Html.BeginForm("PostShitt", "Home", FormMethod.Post, new
+        {
+            @class = "col-md-9 shitt-post-textarea-div",
+            role = "form",
+            enctype = "multipart/form-data"
+        }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.TextAreaFor(model => model.Content, new { @class = "form-control", rows = "2", placeholder = "What's on your mind?", id = "shitt-post-content" })
+            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(m => m.ImageDataUrl, "", new { @class = "text-danger" })
+           <div class="row center" id="post-shitt-buttons">             
+                    <span class="btn btn-info btn-file">
+                        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>&nbsp; Upload photo
+                        <input type="file" name="ImageDataUrl" class="ImageDataUrl" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png, image/jpg" />
+                    </span>               
+                <input type="submit" class="btn btn-primary" value="Post shitt" />
+            </div>
+        }
+    </div>
+</div>
+

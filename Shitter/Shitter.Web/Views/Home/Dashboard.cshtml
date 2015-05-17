@@ -1,21 +1,25 @@
 ﻿@using Microsoft.AspNet.Identity;
-@*@using PagedList.Mvc;
-    @model PagedList.IPagedList<Shitter.Models.User>*@
-@model  IEnumerable<Shitter.Web.Models.Shitts.ShittViewModel>
+@using PagedList.Mvc;
+@using PagedList;
+
+@model PagedList.IPagedList<Shitter.Web.Models.Shitts.ShittViewModel>
 
 <div class="row home-container">
     @*LEFT SIDE BAR*@
     <div class="user-panel-container col-md-3">
-        @Html.Partial("_UserLeftPanelPartial", (Shitter.Models.User) ViewBag.CurrentUser)
+        @Html.Partial("_UserLeftPanelPartial", (Shitter.Models.User)ViewBag.CurrentUser)
     </div>
     @*CENTER PAGE WITH SHITTS*@
     <div class="home-page-shitts-containter col-md-6">
+        @*DISPLAY POST NEW SHIT FORM*@
+        @Html.Partial("_UserPostShittPartial", new ViewDataDictionary { { "image", ViewBag.UserImage } })
+        @*DISPLAY ALL SHITTS*@
         @Html.DisplayForModel()
-
         @*PAGINATION*@
-        @*<div class="center">
-                @Html.PagedListPager(Model, id => Url.Action("Index", new { id }))
-            </div>*@
+        <div class="center pagination-div ">
+            @Html.PagedListPager(Model, page => Url.Action("Dashboard", new { page }))
+            @*@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Dashboard", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)*@
+        </div>
     </div>
     @*RIGHT SIDE BAR*@
     <div class="left-panel-container col-md-3">
