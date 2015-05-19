@@ -72,3 +72,4 @@ E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Microsoft.AspNet.Ide
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\obj\Debug\Shitter.Models.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\obj\Debug\Shitter.Models.pdb
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\obj\Debug\Shitter.Models.csprojResolveAssemblyReference.cache

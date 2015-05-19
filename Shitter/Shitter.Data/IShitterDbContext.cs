@@ -7,7 +7,6 @@
 
     public interface IShitterDbContext
     {
-
         IDbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

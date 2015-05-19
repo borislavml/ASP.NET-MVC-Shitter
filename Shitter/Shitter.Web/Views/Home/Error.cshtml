@@ -1,16 +1,16 @@
 ﻿@{
-    viewbag.title = "error";
+
+    ViewBag.title = "error";
 }
 
 <div class="row">
     <div class="col-md-6 center">
-        <h3 class="text-center text-info">@viewbag.message</h3>
+        <h3 class="text-center text-info">@ViewBag.message</h3>
         <p class="text-center text-info">
-            you can @html.actionlink("return to the homepage.", "index") and try again!
+            you can @Html.ActionLink("return to the homepage.", "index") and try again!
         </p>
     </div>
 </div>
-
 
 
 

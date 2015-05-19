@@ -6,8 +6,6 @@
     using System.Web.Http;
     using System.Web.Mvc;
 
-    using Microsoft.AspNet.Identity;
-
     using Shitter.Models;
     using Shitter.Data.UnitOfWork;
 

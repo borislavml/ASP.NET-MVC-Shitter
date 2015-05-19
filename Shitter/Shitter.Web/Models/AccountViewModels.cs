@@ -86,7 +86,7 @@
 
         [Required]
         [Display(Name = "Name")]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [StringLength(30, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 2)]
         public string FullName { get; set; }
 
         [Required]
