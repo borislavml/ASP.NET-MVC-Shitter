@@ -15,8 +15,8 @@ namespace Shitter.Web
 
             routes.MapRoute(
                 name: "Users",
-                url: "users/{username}",
-                defaults: new { controller = "Users", action = "Index"}
+                url: "users/{username}/{page}",
+                defaults: new { controller = "Users", action = "Index", page = UrlParameter.Optional }
             );
 
             routes.MapRoute(

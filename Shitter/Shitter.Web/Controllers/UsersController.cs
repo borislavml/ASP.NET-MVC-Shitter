@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.Routing;
+
     using Microsoft.AspNet.Identity;
 
     using Shitter.Models;
@@ -13,25 +15,29 @@
     using Shitter.Web.Models.Users;
     using Shitter.Web.Models.Shitts;
 
+    using PagedList;
+    
+
     public class UsersController : BaseController
     {
+        private const int PAGE_SIZE = 10;
+
         public UsersController(IShiterData data)
             : base(data)
         {
         }
 
         // GET: userprofile
-        public ActionResult Index(string username)
+        public ActionResult Index(string username, int? page)
         {
             if (String.IsNullOrEmpty(username) && User.Identity.IsAuthenticated)
             {
                 username = User.Identity.GetUserName();
             }
 
-            var user= this.Data.Users.All()
-                .Include(u => u.PostedShitts)
+            var user = this.Data.Users.All()
                 .Where(u => u.UserName == username)
-                .Select(UserProfileViewModel.ViewModel)   
+                .Select(UserProfileViewModel.ViewModel)
                 .FirstOrDefault();
 
             if (user == null)
@@ -39,7 +45,60 @@
                 return this.RedirectToAction("NotFound", "Home");
             }
 
-            return this.View(user);
+            ViewBag.CurrentUser = user;
+            ViewBag.DisplayFollowUnfollowButton = false;
+            ViewBag.UserIsFollowing = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.DisplayFollowUnfollowButton = (this.UserProfile.Id != user.Id);
+                // check if user is following this user
+                List<string> followingList = this.UserProfile.Following.Select(f => f.UserName).ToList();
+                bool userIsFollowing = followingList.Contains(username) ? true : false;
+                ViewBag.UserIsFollowing = userIsFollowing;
+            }
+
+            var userShitts = this.Data.Shitts.All()
+                .Where(s => s.OwnerId == user.Id)
+                .Select(ShittViewModel.ViewModel)
+                .OrderByDescending(s => s.CreatedOn);
+
+            int pageSize = PAGE_SIZE;
+            int pageNumber = page ?? 1;
+
+            PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(userShitts, pageNumber, pageSize);
+            return this.View(model);
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Unfollow(string id)
+        {
+            var userToUnfollow = this.Data.Users.All()
+                .FirstOrDefault(u => u.Id == id);
+
+
+            var user = this.Data.Users.All()
+                .FirstOrDefault(u => u.UserName == this.UserProfile.UserName);
+            try
+            {
+                user.Following.Remove(userToUnfollow);
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            return RedirectToAction("Index", new RouteValueDictionary( new 
+            { 
+                controller = "Users",
+                action = "Index",
+                username = userToUnfollow.UserName 
+            }));
+        }
+
+
     }
 }

@@ -15,13 +15,18 @@
             @Html.AntiForgeryToken()
             @Html.TextAreaFor(model => model.Content, new { @class = "form-control", rows = "2", placeholder = "What's on your mind?", id = "shitt-post-content" })
             @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
-            @Html.ValidationMessageFor(m => m.ImageDataUrl, "", new { @class = "text-danger" })
-           <div class="row center" id="post-shitt-buttons">             
-                    <span class="btn btn-info btn-file">
-                        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>&nbsp; Upload photo
-                        <input type="file" name="ImageDataUrl" class="ImageDataUrl" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png, image/jpg" />
-                    </span>               
-                <input type="submit" class="btn btn-primary" value="Post shitt" />
+            <div class="row center" id="post-shitt-buttons">
+                <p class="uploadshitt-file-size-alert text-danger">File size should be less than 500kb!</p>
+                <p class="uploadshitt-file-format-alert text-danger">Only jpeg, png and gif formats allowed!</p>
+                <div class="upload-shitt-photo-div">
+                    <img src="" alt="" class="uploaded-image-content img-responsive ">
+                    <span class="delete-uploaded-shitt-photo"><a class="delete-uploaded-shitt-photo-button btn btn-danger">Delete</a></span>
+                </div>
+                <span class="btn btn-info btn-file">
+                    <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>&nbsp; Upload photo
+                    <input type="file" name="ImageDataUrl" class="ImageDataUrl-photo" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png, image/jpg" />
+                </span>
+                <input type="submit" class="submit-post-disable btn btn-primary" value="Post shitt" />
             </div>
         }
     </div>

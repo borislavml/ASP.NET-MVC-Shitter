@@ -3,9 +3,11 @@
 <div class="shitt-div-container">
     <div class="row shitt-div-heading">
         <div class="col-md-3 shittt-user-photo-container">
-            <img src="@Model.OwnerImageDataUrl" class="img-responsive shittt-user-photo" />
+            <a href="/users/@Model.OwnerUsername">
+                <img src="@Model.OwnerImageDataUrl" class="img-responsive shittt-user-photo" />
+            </a>
         </div>
-        <div class="col-md-8 shittt-user-info-container">
+        <div class="col-md-9 shittt-user-info-container">
             <div class="row">
                 <span class=""><strong><a href="/users/@Model.OwnerUsername" class="black-text-link">@Model.OwnerName</a></strong></span>
                 <span class="user-tag-name">@@@Model.OwnerUsername</span>
@@ -13,12 +15,14 @@
             </div>
             <div class="row shitt-div-content">
                 <p class="shitt-content-paragraph"> @Model.Content</p>
-                <div class="center">
+              
                     @if (@Model.ImageDataUrl != null)
                     {
-                        <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive shitt-post-photo" />
+                        <div class="center shitt-post-photo-container">
+                            <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive shitt-post-photo" />
+                        </div>
                     }
-                </div>
+                       
             </div>
         </div>
     </div>
