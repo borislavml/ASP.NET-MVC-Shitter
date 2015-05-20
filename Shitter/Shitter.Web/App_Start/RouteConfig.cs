@@ -14,9 +14,9 @@ namespace Shitter.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Users",
-                url: "users/{username}/{page}",
-                defaults: new { controller = "Users", action = "Index", page = UrlParameter.Optional }
+                name: "UsersProfile",
+                url: "users/{action}/{username}/{page}",
+                defaults: new { controller = "Users", action = "Profile", username = UrlParameter.Optional, page = UrlParameter.Optional }
             );
 
             routes.MapRoute(

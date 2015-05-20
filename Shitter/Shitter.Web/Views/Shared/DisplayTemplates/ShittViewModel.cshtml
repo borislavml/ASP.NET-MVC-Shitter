@@ -3,13 +3,13 @@
 <div class="shitt-div-container">
     <div class="row shitt-div-heading">
         <div class="col-md-3 shittt-user-photo-container">
-            <a href="/users/@Model.OwnerUsername">
+            <a href="/users/profile/@Model.OwnerUsername">
                 <img src="@Model.OwnerImageDataUrl" class="img-responsive shittt-user-photo" />
             </a>
         </div>
         <div class="col-md-9 shittt-user-info-container">
             <div class="row">
-                <span class=""><strong><a href="/users/@Model.OwnerUsername" class="black-text-link">@Model.OwnerName</a></strong></span>
+                <span class=""><strong><a href="/users/profile/@Model.OwnerUsername" class="black-text-link">@Model.OwnerName</a></strong></span>
                 <span class="user-tag-name">@@@Model.OwnerUsername</span>
                 <span class="shitt-date">@Model.CreatedOn.ToString("hh:mm MMM dd, yyyy")</span>
             </div>

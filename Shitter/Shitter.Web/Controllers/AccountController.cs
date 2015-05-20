@@ -161,13 +161,23 @@
                     UserName = model.Username,
                     Email = model.Email,
                     RegistrationDate = DateTime.Now,
+                    ImageDataUrl = "/Content/Images/Users/no-image.png",
                 };
 
                 // upload image if existing
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
-                    string base64String = this.ConvertImageToBase64String(model.ImageDataUrl);
-                    user.ImageDataUrl = base64String;
+                    var file = Request.Files[0];
+                    string pathToSave = Server.MapPath("~/Content/Images/Users/");
+                    string filename = Path.GetFileName(file.FileName);
+
+                    //ad current datetime to filename for uniqueness and save to file system
+                    string curentDateTimeString = DateTime.Now.ToString("hh-mm-ss-yyyy-mm-d");
+                    filename = curentDateTimeString + filename;
+                    file.SaveAs(Path.Combine(pathToSave, filename));
+
+                    // ad photo path in database
+                    user.ImageDataUrl = "/Content/Images/Users/" + filename;    
                 }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -191,17 +201,6 @@
             return View(model);
         }
 
-        private string ConvertImageToBase64String(HttpPostedFileBase image)
-        {
-            var stream = image.InputStream;
-            byte[] fileBytes = new byte[stream.Length];
-            int byteCount = stream.Read(fileBytes, 0, (int)stream.Length);
-            string fileContent = Convert.ToBase64String(fileBytes);
-
-            return "data:image/" + image.ContentType + ";" + "base64, " + fileContent;
-        }
-
-        //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)

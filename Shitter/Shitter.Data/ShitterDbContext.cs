@@ -6,11 +6,12 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using Shitter.Models;
-
+    using Shitter.Data.Migrations;
     public class ShitterDbContext : IdentityDbContext<User>, IShitterDbContext
     {
         public ShitterDbContext(): base("DefaultConnection")
-        {      
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShitterDbContext, Configuration>());
         }
 
         public IDbSet<Message> Messages { get; set; }

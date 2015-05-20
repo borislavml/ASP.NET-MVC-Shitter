@@ -44,22 +44,14 @@
     {
         if (ViewBag.UserIsFollowing)
         {
-            <div class="follow-user-button-div col-md-11 center">
-                @Ajax.ActionLink("Unfollow", "Unfollow","Users", new { id = Model.Id },
-                new AjaxOptions
-                {
-                    HttpMethod = "POST",
-                }, new { @class = "follow-user-button btn btn-lg btn-danger" })
+            <div class="follow-user-button-div col-md-11 center" id="follow-unfollow-button">
+                @Html.Partial("_UnfollowUserPartial", new ViewDataDictionary { { "id", Model.Id } })
             </div>
-                 
         }
         else
         {
-            <div class="follow-user-button-div col-md-11 center">
-                <a class="follow-user-button btn btn-lg btn-primary">
-                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                    &nbsp; Follow
-                </a>
+            <div class="follow-user-button-div col-md-11 center" id="follow-unfollow-button">
+                @Html.Partial("_FollowUserPartial", new ViewDataDictionary { { "id", Model.Id } })
             </div>
         }
     }

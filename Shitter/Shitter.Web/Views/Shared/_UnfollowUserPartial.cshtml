@@ -1,0 +1,12 @@
+﻿
+@using (Ajax.BeginForm("Unfollow", "Users", new { id = ViewData["id"] },
+    new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "follow-unfollow-button"
+    }))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Unfollow" class="follow-user-button btn btn-lg btn-danger" />
+}

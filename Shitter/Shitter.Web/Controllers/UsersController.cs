@@ -28,7 +28,7 @@
         }
 
         // GET: userprofile
-        public ActionResult Index(string username, int? page)
+        public ActionResult Profile(string username, int? page)
         {
             if (String.IsNullOrEmpty(username) && User.Identity.IsAuthenticated)
             {
@@ -49,10 +49,11 @@
             ViewBag.DisplayFollowUnfollowButton = false;
             ViewBag.UserIsFollowing = false;
 
+            // display follow/unfollow button if user is authenticated
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.DisplayFollowUnfollowButton = (this.UserProfile.Id != user.Id);
-                // check if user is following this user
+                // check if user is following this user 
                 List<string> followingList = this.UserProfile.Following.Select(f => f.UserName).ToList();
                 bool userIsFollowing = followingList.Contains(username) ? true : false;
                 ViewBag.UserIsFollowing = userIsFollowing;
@@ -72,11 +73,11 @@
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Unfollow(string id)
         {
             var userToUnfollow = this.Data.Users.All()
                 .FirstOrDefault(u => u.Id == id);
-
 
             var user = this.Data.Users.All()
                 .FirstOrDefault(u => u.UserName == this.UserProfile.UserName);
@@ -88,17 +89,38 @@
             catch (Exception ex)
             {
 
-                return this.RedirectToAction("Error", "Home");
+                return JavaScript("window.location = '/Home/error'");
             }
 
-            return RedirectToAction("Index", new RouteValueDictionary( new 
-            { 
-                controller = "Users",
-                action = "Index",
-                username = userToUnfollow.UserName 
-            }));
+            ViewData["id"] = id;
+            return this.PartialView("_FollowUserPartial");
         }
 
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Follow(string id)
+        {
+            var userToFollow = this.Data.Users.All()
+                .FirstOrDefault(u => u.Id == id);
+
+            var user = this.Data.Users.All()
+                .FirstOrDefault(u => u.UserName == this.UserProfile.UserName);
+            try
+            {
+                user.Following.Add(userToFollow);
+                this.Data.SaveChanges();
+            }
+
+            catch (Exception ex)
+            {
+
+                return JavaScript("window.location = '/Home/error'");
+            }
+
+            ViewData["id"] = id;
+            return this.PartialView("_UnfollowUserPartial");
+        }
 
     }
 }

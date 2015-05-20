@@ -19,7 +19,7 @@
                     Content = x.Content,
                     CreatedOn = x.CreatedOn,
                     Reshitts = x.Reshitts,
-                    OwnerImageDataUrl = x.Owner.ImageDataUrl == null ? "/Content/Images/no-image.png" : x.Owner.ImageDataUrl,
+                    OwnerImageDataUrl = x.Owner.ImageDataUrl,
                     OwnerUsername = x.Owner.UserName,
                     OwnerName = x.Owner.FullName,
                     OwnerId = x.Owner.Id,

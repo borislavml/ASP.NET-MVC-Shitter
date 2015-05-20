@@ -3,10 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions;
+    using System.Web.Routing;
 
     using PagedList;
 
@@ -14,7 +16,7 @@
     using Shitter.Data.UnitOfWork;
     using Shitter.Web.Models.Shitts;
     using Shitter.Web.Models.Users;
-
+ 
     public class HomeController : BaseController
     {
         private const int PAGE_SIZE = 10;
@@ -48,7 +50,7 @@
         {
             var currentUser = this.UserProfile;
             ViewBag.CurrentUser = currentUser;
-            ViewBag.UserImage = (currentUser.ImageDataUrl != null) ? currentUser.ImageDataUrl : "/Content/Images/no-image.png";
+            ViewBag.UserImage = currentUser.ImageDataUrl;
 
             // get user's following list names 
             List<string> userFollowing = this.UserProfile.Following.Select(f => f.UserName).ToList();
@@ -68,7 +70,7 @@
                          Content = match.Content,
                          CreatedOn = match.CreatedOn,
                          Reshitts = match.Reshitts,
-                         OwnerImageDataUrl = match.Owner.ImageDataUrl == null ? "/Content/Images/no-image.png" : match.Owner.ImageDataUrl,
+                         OwnerImageDataUrl = match.Owner.ImageDataUrl,
                          OwnerUsername = match.Owner.UserName,
                          OwnerName = match.Owner.FullName,
                          OwnerId = match.Owner.Id,
@@ -100,8 +102,17 @@
                 // upload image if existing
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
-                    string base64String = this.ConvertImageToBase64String(model.ImageDataUrl);
-                    shitt.ImageDataUrl = base64String;
+                    var file = Request.Files[0];
+                    string pathToSave = Server.MapPath("~/Content/Images/Shitts/");
+                    string filename = Path.GetFileName(file.FileName);
+
+                    //ad current datetime to filename for uniqueness and save to file system
+                    string curentDateTimeString = DateTime.Now.ToString("hh-mm-ss-yyyy-mm-d");
+                    filename = curentDateTimeString + filename;
+                    file.SaveAs(Path.Combine(pathToSave, filename));
+
+                    // ad photo path in database
+                    shitt.ImageDataUrl = "/Content/Images/Shitts/" + filename;    
                 }
 
                 try

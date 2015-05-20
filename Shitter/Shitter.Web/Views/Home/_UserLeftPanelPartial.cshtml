@@ -1,15 +1,11 @@
 ﻿@model Shitter.Models.User
 
-@{
-    ViewBag.UserImage = Model.ImageDataUrl != null ? Model.ImageDataUrl : "/Content/Images/no-image.png";
-}
-
 <div class="row">
     <div class="col-md-11 user-left-panel-div">
         <div class="row blue-semi-div"></div>
         <div class="row user-left-panel-info">
             <div class="col-md-4 user-left-pannel-photo-container">
-                <img src="@ViewBag.UserImage" alt="@Model.UserName avatar" class="img-responsive user-left-pannel-photo" />
+                <img src="@Model.ImageDataUrl" alt="@Model.UserName avatar" class="img-responsive user-left-pannel-photo" />
             </div>
             <div class="col-md-7">
                 <h4><strong class="underline-text">@Model.FullName</strong></h4>
@@ -17,7 +13,7 @@
             </div>
             <div class="col-md-12 user-shitts-following-info">
                 <div class="col-md-4">
-                    <a href="/users/@Model.UserName" class="user-shitts-folloers-following-links">
+                    <a href="/users/profile/@Model.UserName" class="user-shitts-folloers-following-links">
                         <div class="shitts-folloers-following-headings">Shitts</div>
                         <div class="user-info-counts">@Model.PostedShitts.Count</div>
                     </a>
