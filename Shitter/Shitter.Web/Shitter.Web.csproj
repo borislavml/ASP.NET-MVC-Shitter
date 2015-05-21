@@ -224,6 +224,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Shitts\PostShitViewModel.cs" />
     <Compile Include="Models\Shitts\ShittViewModel.cs" />
+    <Compile Include="Models\Users\UserProfileMiniViewModel.cs" />
     <Compile Include="Models\Users\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -242,6 +243,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
+    <Content Include="Scripts\ajax-tabs.js" />
     <Content Include="Scripts\back-to-top.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -318,6 +320,10 @@
     <Content Include="Views\Home\_UserPostShittPartial.cshtml" />
     <Content Include="Views\Shared\_FollowUserPartial.cshtml" />
     <Content Include="Views\Shared\_UnfollowUserPartial.cshtml" />
+    <Content Include="Views\Shared\_UserFollowingPartialView.cshtml" />
+    <Content Include="Views\Shared\_UserFollowersPartialView.cshtml" />
+    <Content Include="Views\Shared\_UserFavouritesPartialView.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UserProfileMiniViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

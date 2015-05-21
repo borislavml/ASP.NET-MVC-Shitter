@@ -4,7 +4,7 @@
     {
         HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "follow-unfollow-button"
+        UpdateTargetId = "follow-unfollow-button-" + ViewData["id"],
     }))
 {
     @Html.AntiForgeryToken()

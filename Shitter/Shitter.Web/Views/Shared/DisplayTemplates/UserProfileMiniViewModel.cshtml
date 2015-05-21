@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@model Shitter.Web.Models.Users.UserProfileMiniViewModel
+
+<div class="user-mini-profile-div-container col-md-3" id="user-mini-@Model.Id">
+    <div class="row">
+        <div class="col-md-6 user-mini-profile-photo-container">
+            <a href="/users/profile/@Model.UserName">
+                <img src="@Model.ImageDataUrl" alt="@Model.UserName avatar" class="img-responsive user-mini-profile-photo" />
+            </a>
+        </div>
+        <div class="col-md-6 user-mini-profile-button-container">
+            @*CHECK IF USER IS AUTHENTICATED AND DISPLAY FOLLOW UNFOLLOW BUTTON*@
+            @if (User.Identity.IsAuthenticated)
+            {
+                @*CHECK IF AUTHENTICATED USRE IS NOT CURRENTLY DISPLAYED USER*@
+                if (User.Identity.GetUserId() != Model.Id)
+                {
+                    if (@Model.UserIsFollowing)
+                    {
+                        <div class="follow-user-button-div col-md-11 center" id="follow-unfollow-button-@Model.Id">
+                            @Html.Partial("_UnfollowUserPartial", new ViewDataDictionary { { "id", Model.Id } })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="follow-user-button-div col-md-11 center" id="follow-unfollow-button-@Model.Id">
+                            @Html.Partial("_FollowUserPartial", new ViewDataDictionary { { "id", Model.Id } })
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <h3 class="user-mini-profile-name-heading underline-text">
+        <a href="/users/profile/@Model.UserName" class="user-mini-profile-name-heading-link">@Model.FullName</a>
+    </h3>
+    <a href="/users/profile/@Model.UserName">
+        <span class="user-tag-name underline-text">@@@Model.UserName</span>
+    </a>
+    <p class="user-mini-profile-summary">@Model.Summary</p>
+</div>

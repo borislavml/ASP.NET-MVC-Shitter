@@ -4,9 +4,23 @@
     {
         HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "follow-unfollow-button"
+        UpdateTargetId = "follow-unfollow-button-" + ViewData["id"],
+        //OnSuccess = "updateFollowersList('" + ViewData["id"] + "')",
+   
     }))
 {
     @Html.AntiForgeryToken()
     <input type="submit" value="Unfollow" class="follow-user-button btn btn-lg btn-danger" />
 }
+
+
+
+ 
+
+@*<script>
+
+    function updateFollowersList(id) {
+        var x = document.getElementById("user-mini-" + id);
+        x.innerHTML = "";
+    }
+</script>*@     

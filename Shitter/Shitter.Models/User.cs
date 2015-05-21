@@ -58,7 +58,7 @@
         public string Town { get; set; }
 
         [MinLength(2)]
-        [MaxLength(150)]
+        [MaxLength(100)]
         public string Summary { get; set; }
 
         [Url]

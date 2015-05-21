@@ -9,24 +9,60 @@
     <div class="user-panel-container col-md-3">
         @Html.Partial("_UserProfileLeftPanelPartial", (Shitter.Web.Models.Users.UserProfileViewModel)ViewBag.CurrentUser)
     </div>
-    @*CENTER PAGE WITH SHITTS*@
-    <div class="home-page-shitts-containter col-md-6">
-        @Html.DisplayForModel();
-        @if (@Model.Count == 0)
-        {
-            <div class="center"><h4 class="text-center">No shitts posted yet.</h4></div>
-        }
-        else 
-        {
-            @*PAGINATION*@
-            <div class="center pagination-div ">
-                @Html.PagedListPager(Model, page => Url.Action("Profile", new { page }))
+    @*CENTER PAGE WITH SHITTS, FOLLOWERS, FOLLOWING AND FAVOURITES*@
+    <div class="home-page-shitts-containter col-md-9">
+        <ul class="nav nav-tabs">
+            <li class="active ">
+                <a href="#shitts" data-toggle="tab" aria-expanded="true" class="user-pofile-tabs">
+                Shitts<div class="text-center">@ViewBag.CurrentUser.PostedShittsCount</div>
+                </a>
+            </li>
+            <li class="">
+                <a href="#following" data-toggle="tab" aria-expanded="true" id="following-tab" class="user-pofile-tabs" data-id="@ViewBag.CurrentUser.Id">
+                    Following<div class="text-center">@ViewBag.CurrentUser.FollowingCount</div>
+                </a>
+            </li>
+            <li class="">
+                <a href="#followers" data-toggle="tab" aria-expanded="true" id="followers-tab" class="user-pofile-tabs" data-id="@ViewBag.CurrentUser.Id">
+                Followers<div class="text-center">@ViewBag.CurrentUser.FollowersCount</div>
+                </a>             
+            </li>
+            <li class="">
+                <a href="#favourites" data-toggle="tab" aria-expanded="true" id="favourites-tab" class="user-pofile-tabs" data-id="@ViewBag.CurrentUser.Id">
+                Favourites<div class="text-center">@ViewBag.CurrentUser.FavouritesCount</div>
+                </a>               
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            @*SHITTS*@
+            <div class="tab-pane fade active in col-md-9 user-pofile-tabs-content" id="shitts">
+                @Html.DisplayForModel();
+                @if (@Model.Count == 0)
+                {
+                    <div class="center"><h4 class="text-center">No shitts posted yet.</h4></div>
+                }
+                else
+                {
+                    @*PAGINATION*@
+                    <div class="center pagination-div ">
+                        @Html.PagedListPager(Model, page => Url.Action("Profile", new { page }))
+                    </div>
+                }
             </div>
-        }
-    </div>
-    @*RIGHT SIDE BAR*@
-    <div class="col-md-3 left-panel-container">
+            @*FOLLOWERS*@
+            <div class="tab-pane fade col-md-12 user-pofile-tabs-content" id="following">
+                @*partial from ajax call is loaded here*@
+            </div>
+            <div class="tab-pane fade col-md-12 user-pofile-tabs-content" id="followers">
+                @*partial from ajax call is loaded here*@
+            </div>
+            <div class="tab-pane fade col-md-9 user-pofile-tabs-content" id="favourites">
+                @*partial from ajax call is loaded here*@
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 

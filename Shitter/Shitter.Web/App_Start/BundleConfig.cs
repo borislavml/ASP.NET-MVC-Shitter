@@ -23,11 +23,13 @@ namespace Shitter.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+
             // custom script 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                        "~/Scripts/file-upload.js", 
                        "~/Scripts/text-area-expand.js",
-                       "~/Scripts/back-to-top.js"));
+                       "~/Scripts/back-to-top.js",
+                       "~/Scripts/ajax-tabs.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

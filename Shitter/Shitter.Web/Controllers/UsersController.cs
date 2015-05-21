@@ -4,23 +4,23 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Net;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
-
     using Microsoft.AspNet.Identity;
+
+    using PagedList;
 
     using Shitter.Models;
     using Shitter.Data.UnitOfWork;
     using Shitter.Web.Models.Users;
     using Shitter.Web.Models.Shitts;
 
-    using PagedList;
-    
-
     public class UsersController : BaseController
     {
         private const int PAGE_SIZE = 10;
+        private const int PAGE_SIZE_FOLLOWERS = 9;
 
         public UsersController(IShiterData data)
             : base(data)
@@ -46,6 +46,7 @@
             }
 
             ViewBag.CurrentUser = user;
+   
             ViewBag.DisplayFollowUnfollowButton = false;
             ViewBag.UserIsFollowing = false;
 
@@ -122,5 +123,112 @@
             return this.PartialView("_UnfollowUserPartial");
         }
 
+        [HttpGet]
+        public ActionResult Following(string id, int? page)
+        {
+            //if (!Request.IsAjaxRequest())
+            //{
+            //    Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            //    return JavaScript("window.location = '/Home/Error'");
+            //}
+
+            var userToGetFollowingList = this.Data.Users.All()
+                .FirstOrDefault(u => u.Id == id);
+
+            var followingList = userToGetFollowingList.Following
+                .Select(f => new UserProfileMiniViewModel
+                {
+                   Id = f.Id,
+                   UserName = f.UserName,
+                   FullName =f.FullName,
+                   ImageDataUrl = f.ImageDataUrl,
+                   Summary = f.Summary,
+                   UserIsFollowing = this.UserisFollowing(f.UserName),
+                });
+
+            int pageSize = PAGE_SIZE_FOLLOWERS;
+            int pageNumber = page ?? 1;
+
+            PagedList<UserProfileMiniViewModel> model = new PagedList<UserProfileMiniViewModel>(followingList, pageNumber, pageSize);
+
+            ViewData["user-id"] = userToGetFollowingList.Id;
+            return this.PartialView("_UserFollowingPartialView",model);
+        }
+
+        [HttpGet]
+        public ActionResult Followers(string id, int? page)
+        {
+            var userToGetFollowersList = this.Data.Users.All()
+                .FirstOrDefault(u => u.Id == id);
+
+            var followersList = userToGetFollowersList.Followers
+                .Select(f => new UserProfileMiniViewModel 
+                {
+                    Id = f.Id,
+                    UserName = f.UserName,
+                    FullName = f.FullName,
+                    ImageDataUrl = f.ImageDataUrl,
+                    Summary = f.Summary,
+                    UserIsFollowing = this.UserisFollowing(f.UserName),
+                });
+
+            int pageSize = PAGE_SIZE_FOLLOWERS;
+            int pageNumber = page ?? 1;
+
+            PagedList<UserProfileMiniViewModel> model = new PagedList<UserProfileMiniViewModel>(followersList, pageNumber, pageSize);
+
+            ViewData["user-id"] = userToGetFollowersList.Id;
+            return this.PartialView("_UserFollowersPartialView", model);
+        }
+
+        [HttpGet]
+        public ActionResult Favourites(string id, int? page)
+        {
+            var userToGetFvourtiesList = this.Data.Users.All()
+                .FirstOrDefault(u => u.Id == id);
+
+            var favouritesList = userToGetFvourtiesList.FavouriteShitts
+                .OrderByDescending(s => s.CreatedOn)
+                .Select(s => new ShittViewModel 
+                {
+                    Id = s.Id,
+                    ImageDataUrl = s.ImageDataUrl,
+                    Content = s.Content,
+                    CreatedOn = s.CreatedOn,
+                    Reshitts = s.Reshitts,
+                    OwnerImageDataUrl = s.Owner.ImageDataUrl,
+                    OwnerUsername = s.Owner.UserName,
+                    OwnerName = s.Owner.FullName,
+                    OwnerId = s.Owner.Id,
+                    FavoureitesCount = s.UsersFavourite.Count,
+                });
+                
+            int pageSize = PAGE_SIZE;
+            int pageNumber = page ?? 1;
+
+            PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(favouritesList, pageNumber, pageSize);
+
+            ViewData["user-id"] = userToGetFvourtiesList.Id;
+            return this.PartialView("_UserFavouritesPartialView", model);
+        }
+
+        private bool UserisFollowing(string username)
+        {
+            // check if user is authenticated to show follow/unfollow button
+            if (User.Identity.IsAuthenticated)
+            {
+                //check if currently authenticated user is not currently displayed user
+                if (this.UserProfile.UserName != username)
+                {
+                    // check if currently authenticated user is following currently displayed user
+                    List<string> followingList = this.UserProfile.Following.Select(f => f.UserName).ToList();
+                    bool userIsFollowing = followingList.Contains(username) ? true : false;
+
+                    return userIsFollowing;
+                }
+            }
+
+            return false;
+        }
     }
 }

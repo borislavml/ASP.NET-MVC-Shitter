@@ -20,13 +20,17 @@
                     Id = x.Id,
                     UserName = x.UserName,
                     FullName = x.FullName,
-                    ImageDataUrl = x.ImageDataUrl == null ? "/Content/Images/no-image.png" : x.ImageDataUrl,
+                    ImageDataUrl = x.ImageDataUrl,
                     Email = x.Email,
                     Country = x.Country,
                     Town = x.Town,
                     Summary = x.Summary,
                     Website = x.Website,
                     RegistrationDate = x.RegistrationDate,
+                    PostedShittsCount = x.PostedShitts.Count,
+                    FollowingCount = x.Following.Count,
+                    FollowersCount = x.Followers.Count,
+                    FavouritesCount = x.FavouriteShitts.Count,
                     //PostedShitts = x.PostedShitts.AsQueryable()
                     //    .Select(ShittViewModel.ViewModel)
                     //    .OrderByDescending(s => s.CreatedOn)
@@ -54,12 +58,12 @@
 
         public DateTime RegistrationDate { get; set; }
 
-        //public IEnumerable<ShittViewModel> PostedShitts { get; set; }
+        public int PostedShittsCount { get; set; }
 
-        //public IEnumerable<ShittViewModel> FavouriteShitts { get; set; }
+        public int FollowersCount { get; set; }
 
-        //public ICollection<User> Followers { get; set; }
+        public int FollowingCount { get; set; }
 
-        //public virtual ICollection<User> Following { get; set; }
+        public int FavouritesCount { get; set; }
     }
 }
