@@ -46,7 +46,9 @@
             }
 
             ViewBag.CurrentUser = user;
-   
+            ViewBag.UserViewingThePageName = this.UserProfile.UserName;
+            ViewBag.UserViewingThePageId = this.UserProfile.Id;
+
             ViewBag.DisplayFollowUnfollowButton = false;
             ViewBag.UserIsFollowing = false;
 

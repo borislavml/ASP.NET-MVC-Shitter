@@ -16,7 +16,7 @@
     using Shitter.Data.UnitOfWork;
     using Shitter.Web.Models.Shitts;
     using Shitter.Web.Models.Users;
- 
+
     public class HomeController : BaseController
     {
         private const int PAGE_SIZE = 10;
@@ -58,12 +58,12 @@
 
             // get shitts owned by user's following
             var matches = from shitt in this.Data.Shitts.All()
-                           where userFollowing.Contains(shitt.Owner.UserName)         
-                           orderby shitt.CreatedOn descending
-                           select shitt;
+                          where userFollowing.Contains(shitt.Owner.UserName)
+                          orderby shitt.CreatedOn descending
+                          select shitt;
 
             // cast matches to ShittViewModel
-            IEnumerable<ShittViewModel> shitts = matches.Select( match => new ShittViewModel()
+            IEnumerable<ShittViewModel> shitts = matches.Select(match => new ShittViewModel()
                      {
                          Id = match.Id,
                          ImageDataUrl = match.ImageDataUrl,
@@ -84,26 +84,47 @@
             return this.View(model);
         }
 
-        // POST: /Home/PostShitt
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            ViewBag.CurrentUser = this.UserProfile;
+            ViewBag.UserSummary = this.UserProfile.Summary;
+            return this.View();
+        }
+
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult PostShitt(PostShitViewModel model)
+        public ActionResult EditProfile(UserEditProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var shitt = new Shitt
+                var userToEdit = this.Data.Users.All()
+                    .FirstOrDefault(u => u.Id == this.UserProfile.Id);
+
+                userToEdit.FullName = model.FullName;
+                userToEdit.Country = model.Country;
+                userToEdit.Town = model.Town;
+                userToEdit.Summary = model.Summary;
+                userToEdit.Website = model.Website;
+
+                if (model.ImageDeleted == "yes" || model.ImageDataUrl.ContentLength > 0)
                 {
-                    Content = model.Content,
-                    OwnerId = this.UserProfile.Id,    
-                    CreatedOn = DateTime.Now,
-                };
+                    // delete image from file system
+                    string fullPath = Request.MapPath("~" + this.UserProfile.ImageDataUrl);
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
 
                 // upload image if existing
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
                     var file = Request.Files[0];
-                    string pathToSave = Server.MapPath("~/Content/Images/Shitts/");
+                    string pathToSave = Server.MapPath("~/Content/Images/Users/");
                     string filename = Path.GetFileName(file.FileName);
 
                     //ad current datetime to filename for uniqueness and save to file system
@@ -112,28 +133,34 @@
                     file.SaveAs(Path.Combine(pathToSave, filename));
 
                     // ad photo path in database
-                    shitt.ImageDataUrl = "/Content/Images/Shitts/" + filename;    
+                    userToEdit.ImageDataUrl = "/Content/Images/Users/" + filename;
                 }
 
-                try
+                // check if image is deleted
+                if (model.ImageDeleted == "yes")
                 {
-                    this.UserProfile.PostedShitts.Add(shitt);
-                    this.Data.Shitts.Add(shitt);
-                    this.Data.SaveChanges();
+                    userToEdit.ImageDataUrl = "/Content/Images/Users/no-image.png";                  
                 }
-                catch (Exception ex)
-                {
-                    return this.RedirectToAction("Error", "Home");             
-                }           
+
+                this.Data.SaveChanges();
+                string sucessMessage = "Profile edited successfuly!";
+                return this.RedirectToAction("Success", "Home", new { message = sucessMessage });
             }
 
-            return this.RedirectToAction("Dashboard", "Home");
+            return this.RedirectToAction("Error", "Home");
         }
 
         [HttpGet]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            return this.View();
+        }
+
+        [HttpGet]
+        public ActionResult Success(string message)
+        {
+            ViewBag.Message = message;
             return this.View();
         }
 

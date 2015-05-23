@@ -57,11 +57,12 @@
         [MaxLength(20)]
         public string Town { get; set; }
 
-        [MinLength(2)]
+        [MinLength(1)]
         [MaxLength(100)]
         public string Summary { get; set; }
 
         [Url]
+        [MaxLength(50)]
         public string Website { get; set; }
 
         public virtual ICollection<User> Followers 

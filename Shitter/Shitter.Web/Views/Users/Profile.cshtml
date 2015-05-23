@@ -14,22 +14,22 @@
         <ul class="nav nav-tabs">
             <li class="active ">
                 <a href="#shitts" data-toggle="tab" aria-expanded="true" class="user-pofile-tabs">
-                Shitts<div class="text-center">@ViewBag.CurrentUser.PostedShittsCount</div>
+                Shitts<div class="text-center" id="posted-shitts-tab-count">@ViewBag.CurrentUser.PostedShittsCount</div>
                 </a>
             </li>
             <li class="">
                 <a href="#following" data-toggle="tab" aria-expanded="true" id="following-tab" class="user-pofile-tabs" data-id="@ViewBag.CurrentUser.Id">
-                    Following<div class="text-center">@ViewBag.CurrentUser.FollowingCount</div>
+                    Following<div class="text-center" id="following-tab-count">@ViewBag.CurrentUser.FollowingCount</div>
                 </a>
             </li>
             <li class="">
                 <a href="#followers" data-toggle="tab" aria-expanded="true" id="followers-tab" class="user-pofile-tabs" data-id="@ViewBag.CurrentUser.Id">
-                Followers<div class="text-center">@ViewBag.CurrentUser.FollowersCount</div>
+                Followers<div class="text-center" id="followers-tab-count">@ViewBag.CurrentUser.FollowersCount</div>
                 </a>             
             </li>
             <li class="">
                 <a href="#favourites" data-toggle="tab" aria-expanded="true" id="favourites-tab" class="user-pofile-tabs" data-id="@ViewBag.CurrentUser.Id">
-                Favourites<div class="text-center">@ViewBag.CurrentUser.FavouritesCount</div>
+                Favourites<div class="text-center" id="favourites-tab-count">@ViewBag.CurrentUser.FavouritesCount</div>
                 </a>               
             </li>
         </ul>
@@ -62,6 +62,12 @@
         </div>
     </div>
 </div>
+
+@*HIDDEN DIV WITH CURRENTLY LOGGED USER ID USED IN JS SCRIPTS FOR AJAX CALLS*@
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="current-user-name" style="display:none" data-name="@ViewBag.UserViewingThePageName" data-id="ViewBag.UserViewingThePageId"></div>
+}
 
 
 

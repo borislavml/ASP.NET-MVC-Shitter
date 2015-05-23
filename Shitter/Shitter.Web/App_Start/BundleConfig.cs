@@ -29,7 +29,9 @@ namespace Shitter.Web
                        "~/Scripts/file-upload.js", 
                        "~/Scripts/text-area-expand.js",
                        "~/Scripts/back-to-top.js",
-                       "~/Scripts/ajax-tabs.js"));
+                       "~/Scripts/ajax-tabs.js",
+                       "~/Scripts/update-follow-list.js",
+                       "~/Scripts/edit-and-upload-file.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

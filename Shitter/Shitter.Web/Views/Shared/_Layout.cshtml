@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -36,21 +35,15 @@
         <!-- back to top button -->
         <a class="back-to-top"><img src="/Content/Images/back-to-top-button.png"></a>
         @*<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
     </div>
-    @*HIDDEN DIV WITH CURRENTLY LOGGED USER ID USED IN JS SCRIPTS FOR AJAX CALLS*@
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div id="current-user-id" style="display:none" data-id="@User.Identity.GetUserId()"></div>
-    }
-    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/custom")
- 
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

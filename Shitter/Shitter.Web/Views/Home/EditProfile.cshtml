@@ -1,0 +1,93 @@
+﻿@model Shitter.Web.Models.Users.UserEditProfileViewModel
+
+@{
+    ViewBag.Title = "Edit profile";
+}
+
+@using (Html.BeginForm("EditProfile", "Home", FormMethod.Post, new
+{
+    @class = "form-horizontal center col-md-8 login-register-form",
+    role = "form",
+    enctype = "multipart/form-data"
+}))
+{
+    @Html.AntiForgeryToken()
+    <h4 class="text-center">Edit profile.</h4>
+    <hr />
+    <div class="row">
+        @*LEFT SIDE*@
+        <div class="col-md-6 edit-profile-left-side">
+            <div class="form-group">
+                @Html.LabelFor(m => m.FullName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", Value = ViewBag.CurrentUser.FullName })
+                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Country, new { @class = "col-md-3 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control", Value = ViewBag.CurrentUser.Country })
+                    @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Town, new { @class = "col-md-3 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Town, new { @class = "form-control", Value = ViewBag.CurrentUser.Town })
+                    @Html.ValidationMessageFor(m => m.Town, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Summary, new { @class = "col-md-3 control-label" })
+                <div class="col-md-8">                            
+                    <textarea class ="form-control" rows="5"  id="edit-profile-text-area" name="summary">@ViewBag.UserSummary</textarea>
+                    <p class="summary-size-alert text-danger">Summary should be between 1 ana 100 charachters</p>
+                 </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Website, new { @class = "col-md-3 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Website, new { @class = "form-control", Value = ViewBag.CurrentUser.Website })
+                    @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 edit-profile-right-side">
+            <div class="form-group  center">
+                <div class="edit-profile-photo-container center">
+                    <img src="@ViewBag.CurrentUser.ImageDataUrl" alt="Alternate Text" class="img-responsive  center edit-profile-photo " />
+                </div>
+                <div class="col-md-offset-4 col-md-4 col-md-offset-4 ">
+                    <a class="delete-profile-photo-button btn btn-danger center">Delete</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-8 input-group upload-image-input-div">
+                    <span class="input-group-btn">
+                        <span class="btn btn-info btn-file">
+                            Browse
+                            <input type="file" name="ImageDataUrl" class="ImageDataUrl" onchange="readURLedit(this);" accept="image/gif, image/jpeg, image/png, image/jpg" />
+                        </span>
+                    </span>
+                    <input type="text" class="form-control image-title" readonly="" id="profile-picure" value="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 center">
+                    <p class="upload-file-size-alert text-danger">File size should be less than 500kb!</p>
+                    <p class="upload-file-format-alert text-danger">Only jpeg, png and gif formats allowed!</p>
+                    @Html.ValidationMessageFor(m => m.ImageDataUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <input type="hidden" name="ImageDeleted" class="image-deleted" value="no" />        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 center">
+            @Html.ActionLink("Cancel", "Dashboard", "Home", null, new { @class = "btn btn-primary" })
+            <input type="submit" class="btn btn-success submit-edit-disable" value="Edit" />
+        </div>
+    </div>
+}
+

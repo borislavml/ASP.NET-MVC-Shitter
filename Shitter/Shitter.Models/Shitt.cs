@@ -30,7 +30,7 @@
         public string ImageDataUrl { get; set; }
 
         [Required]
-        [MinLength(2)]
+        [MinLength(1)]
         [MaxLength(300)]
         public string Content { get; set; }
 

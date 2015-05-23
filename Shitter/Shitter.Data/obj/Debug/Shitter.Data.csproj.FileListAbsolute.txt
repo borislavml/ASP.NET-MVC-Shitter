@@ -82,3 +82,6 @@ E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Microsoft.AspNet.Ident
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\obj\Debug\Shitter.Data.csprojResolveAssemblyReference.cache
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\obj\Debug\Shitter.Data.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\obj\Debug\Shitter.Data.pdb
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\DataAnnotationsExtensions.ClientValidation.dll
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\DataAnnotationsExtensions.dll
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\WebActivator.dll
