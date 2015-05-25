@@ -1,0 +1,16 @@
+﻿<li class="list-group-item">
+    <span class="badge">@Model.ShitsCount</span>
+    <div class="row">
+        <div class="col-md-4 user-link-photo-container">
+            <a href="/Users/Profile/@Model.UserName">
+                <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive user-link-photo" />
+            </a>
+        </div>
+        <div class="col-md-6 user-link-info">
+            <a href="/Users/Profile/@Model.UserName" class="black-text-link">@Model.FullName</a>
+            <a href="/Users/Profile/@Model.UserName">
+                <span class="user-tag-name">@@@Model.UserName</span>
+            </a>
+        </div>
+    </div>
+</li>

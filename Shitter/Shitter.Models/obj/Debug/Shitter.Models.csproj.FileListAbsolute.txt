@@ -57,6 +57,8 @@ C:\Users\borislav\Desktop\asp\Shitter.Models\obj\Debug\Shitter.Models.pdb
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Shitter.Models.dll.config
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Shitter.Models.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Shitter.Models.pdb
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\DataAnnotationsExtensions.ClientValidation.dll
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\DataAnnotationsExtensions.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\EntityFramework.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\EntityFramework.SqlServer.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Glimpse.Ado.dll
@@ -66,13 +68,10 @@ E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Glimpse.EF6.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Glimpse.Mvc5.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\WebActivator.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\EntityFramework.xml
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\EntityFramework.SqlServer.xml
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\obj\Debug\Shitter.Models.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\obj\Debug\Shitter.Models.pdb
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\DataAnnotationsExtensions.ClientValidation.dll
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\DataAnnotationsExtensions.dll
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\bin\Debug\WebActivator.dll
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Models\obj\Debug\Shitter.Models.csprojResolveAssemblyReference.cache

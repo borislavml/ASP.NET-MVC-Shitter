@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Activities.Expressions
+
+@model  IEnumerable<Shitter.Web.Models.Users.UserLinkViewModel>
+
+<div id="top-shitters">
+    @*<span>Total users: @ViewBag.TotalUsersCount</span>
+    <span>Total shitts: @ViewBag.TotalShittsCoun</span>
+    <span>Avrage: @ViewBag.AvarageShittsCount</span>*@
+    @if (Model.Any())
+    {
+        <ul class="list-group">
+            @Html.DisplayForModel()
+        </ul>
+    }
+
+</div>  

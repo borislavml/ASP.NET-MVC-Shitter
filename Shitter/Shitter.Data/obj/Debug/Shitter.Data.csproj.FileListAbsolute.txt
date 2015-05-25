@@ -64,6 +64,8 @@ C:\Users\borislav\Desktop\asp\Shitter.Data\bin\Debug\Microsoft.AspNet.Identity.E
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Shitter.Data.dll.config
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Shitter.Data.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Shitter.Data.pdb
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\DataAnnotationsExtensions.ClientValidation.dll
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\DataAnnotationsExtensions.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\EntityFramework.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\EntityFramework.SqlServer.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Glimpse.Ado.dll
@@ -74,6 +76,7 @@ E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Glimpse.Mvc5.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Shitter.Models.dll
+E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\WebActivator.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Shitter.Models.pdb
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\EntityFramework.xml
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\EntityFramework.SqlServer.xml
@@ -82,6 +85,3 @@ E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\Microsoft.AspNet.Ident
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\obj\Debug\Shitter.Data.csprojResolveAssemblyReference.cache
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\obj\Debug\Shitter.Data.dll
 E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\obj\Debug\Shitter.Data.pdb
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\DataAnnotationsExtensions.ClientValidation.dll
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\DataAnnotationsExtensions.dll
-E:\Git\ASP.NET-MVC-Shitter\Shitter\Shitter.Data\bin\Debug\WebActivator.dll

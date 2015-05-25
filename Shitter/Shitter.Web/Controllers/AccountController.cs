@@ -161,7 +161,7 @@
                     UserName = model.Username,
                     Email = model.Email,
                     RegistrationDate = DateTime.Now,
-                    ImageDataUrl = "/Content/Images/Users/no-image.png",
+                    ImageDataUrl = "/Content/Images/no-image.png",
                 };
 
                 // upload image if existing

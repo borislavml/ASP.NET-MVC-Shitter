@@ -69,10 +69,9 @@ body {
     font-weight: bold;
 }
 
-.left-panel-container {
+.right-panel-container {
     margin-top: 20px;
     padding: 5px !important;
-    background-color: white;
 }
 
 .user-panel-container {
@@ -413,7 +412,7 @@ select {
 }
 
 .edit-profile-left-side {
-    padding-right: 5!important;
+    padding-right: 5px !important;
 }
 
 .edit-profile-right-side {
@@ -441,6 +440,59 @@ select {
 
 .summary-size-alert {
     display: none;
+}
+
+.top-users-list-div {
+    display: none;
+}
+
+.user-link-photo-container {
+    height: 60px;
+    width: 90px;
+}
+
+.user-link-photo {
+    border: 3px solid white;
+    width: auto;
+    height: 95%;
+    border-radius: 8px;
+}
+
+.user-link-info {
+    padding-left: 0px !important;
+}
+
+.top-ranking-paragraph {
+    text-align: justify;
+    /*word-break:  break-all;*/
+}
+
+.user-searh-link-photo-container {
+    height: 40px;
+    width: 70px;
+    padding-right: 0px !important;
+}
+
+.user-search-link-photo {
+    border: 2px solid white;
+    width: auto;
+    height: 95%;
+    border-radius: 4px;
+}
+
+#search-results {
+  position: absolute;
+  top: 100%;
+  z-index: 900;
+}
+
+.search-result-div-row {
+    margin: 0!important;
+    width: 100% !important;
+}
+
+.search-result-list-item {
+    width: 260px !important;
 }
 
 #divProcessing {

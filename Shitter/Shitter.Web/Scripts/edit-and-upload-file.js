@@ -37,7 +37,7 @@ function readURLedit(input) {
 // delete photo
 $('.delete-profile-photo-button').click(function () {
     $('.edit-profile-photo').val("deleted");
-    $('.edit-profile-photo').attr('src', '/Content/Images/Users/no-image.png');
+    $('.edit-profile-photo').attr('src', '/Content/Images/no-image.png');
     $('.upload-file-size-alert').hide();
     $('.upload-file-format-alert').hide();
     $('.submit-edit-disable').attr("disabled", false);

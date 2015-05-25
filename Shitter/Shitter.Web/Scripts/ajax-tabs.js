@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     // AJAX call for following list
     $('#following-tab').click(function () {
         var url = "/Users/Following";

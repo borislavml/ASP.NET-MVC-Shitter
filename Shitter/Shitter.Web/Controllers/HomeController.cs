@@ -110,19 +110,11 @@
                 userToEdit.Summary = model.Summary;
                 userToEdit.Website = model.Website;
 
-                if (model.ImageDeleted == "yes" || model.ImageDataUrl.ContentLength > 0)
-                {
-                    // delete image from file system
-                    string fullPath = Request.MapPath("~" + this.UserProfile.ImageDataUrl);
-                    if (System.IO.File.Exists(fullPath))
-                    {
-                        System.IO.File.Delete(fullPath);
-                    }
-                }
-
                 // upload image if existing
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
+                    this.DeleteUserPhoto();
+
                     var file = Request.Files[0];
                     string pathToSave = Server.MapPath("~/Content/Images/Users/");
                     string filename = Path.GetFileName(file.FileName);
@@ -133,13 +125,14 @@
                     file.SaveAs(Path.Combine(pathToSave, filename));
 
                     // ad photo path in database
-                    userToEdit.ImageDataUrl = "/Content/Images/Users/" + filename;
+                    userToEdit.ImageDataUrl = "/Content/Images/Users/" + filename;                   
                 }
 
                 // check if image is deleted
                 if (model.ImageDeleted == "yes")
                 {
-                    userToEdit.ImageDataUrl = "/Content/Images/Users/no-image.png";                  
+                    this.DeleteUserPhoto();
+                    userToEdit.ImageDataUrl = "/Content/Images/no-image.png";                 
                 }
 
                 this.Data.SaveChanges();
@@ -148,6 +141,22 @@
             }
 
             return this.RedirectToAction("Error", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Search(string query)
+        {
+            var result = this.Data.Users.All()
+                .Where(u => u.UserName.ToLower().Contains(query.ToLower())
+                    || u.FullName.ToLower().Contains(query.ToLower()))
+                    .Select(u => new UserLinkViewModel
+                    {
+                        UserName = u.UserName,
+                        FullName = u.FullName,
+                        ImageDataUrl = u.ImageDataUrl,
+                    }).ToList();
+
+            return this.PartialView("_UsersResult", result);
         }
 
         [HttpGet]
@@ -176,6 +185,16 @@
         {
             ViewBag.Message = "Ooops, sorry something went wrong!";
             return this.View();
+        }
+
+        private void DeleteUserPhoto()
+        {
+            // delete image from file system
+            string fullPath = Request.MapPath("~" + this.UserProfile.ImageDataUrl);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
         }
     }
 }

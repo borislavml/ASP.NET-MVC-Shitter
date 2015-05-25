@@ -46,8 +46,11 @@
             }
 
             ViewBag.CurrentUser = user;
-            ViewBag.UserViewingThePageName = this.UserProfile.UserName;
-            ViewBag.UserViewingThePageId = this.UserProfile.Id;
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.UserViewingThePageName = this.UserProfile.UserName;
+                ViewBag.UserViewingThePageId = this.UserProfile.Id;
+            }
 
             ViewBag.DisplayFollowUnfollowButton = false;
             ViewBag.UserIsFollowing = false;
@@ -212,6 +215,32 @@
 
             ViewData["user-id"] = userToGetFvourtiesList.Id;
             return this.PartialView("_UserFavouritesPartialView", model);
+        }
+
+        [HttpGet]
+        public ActionResult GetTopUsers()
+        {
+            //int totalUsersCount = this.Data.Users.All().Count();
+            //int totalShittsCount = this.Data.Shitts.All().Count();
+            //int avarageShittsCount = totalShittsCount / totalUsersCount;
+
+            var topUsersList = this.Data.Users.All()
+                .Select(u => new UserLinkViewModel
+                {
+                    UserName = u.UserName,
+                    FullName = u.FullName,
+                    ImageDataUrl = u.ImageDataUrl,
+                    ShitsCount = u.PostedShitts.Count(),
+                })
+                .OrderByDescending( u => u.ShitsCount)
+                .Take(10)
+                .ToList();
+
+            //ViewBag.TotalUsersCount = totalUsersCount;
+            //ViewBag.TotalShittsCount = totalShittsCount;
+            //ViewBag.AvarageShittsCount = avarageShittsCount;
+
+            return this.PartialView("_TopUsersPartialView", topUsersList);
         }
 
         private bool UserisFollowing(string username)
