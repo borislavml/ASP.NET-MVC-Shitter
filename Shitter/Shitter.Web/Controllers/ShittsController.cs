@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -62,6 +63,92 @@
             }
 
             return this.RedirectToAction("Dashboard", "Home");
+        }
+        
+        [Authorize]
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteShitt(int id)
+        {
+            var shittToDelete = this.Data.Shitts.All()
+                .FirstOrDefault(s => s.Id == id);
+            string shittToDeletePhoto = shittToDelete.ImageDataUrl;
+
+            // check if shitt is owned by current user
+            if (shittToDelete.OwnerId == this.UserProfile.Id)
+            {
+                this.Data.Shitts.Delete(shittToDelete);
+                this.Data.SaveChanges();
+
+                if (shittToDeletePhoto != null)
+                {
+                    this.DeleteShittPhoto(shittToDeletePhoto);
+                }
+
+                return Json(id);
+            }
+
+            return Json(id);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FavouriteShitt(int id)
+        {
+            var currentUser = this.UserProfile;
+            var shittToFavourtie = this.Data.Shitts.All()
+                .FirstOrDefault(s => s.Id == id);
+
+            // check if shitt isn't already favourtite for this user
+            List<string> favouritesList = shittToFavourtie.UsersFavourite.Select(f => f.UserName).ToList();
+            bool shittIsFavourite = favouritesList.Contains(currentUser.UserName) ? true : false;
+       
+            if (!shittIsFavourite)
+            {
+                shittToFavourtie.UsersFavourite.Add(currentUser);
+                this.Data.SaveChanges();
+                ViewData["id"] = id;
+
+                return this.PartialView("_UnfavouriteShittButtonPartial");
+            }
+
+            return JavaScript("window.location = '/Home/error'");
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnfavouriteShitt(int id)
+        {
+            var currentUser = this.UserProfile;
+            var shittToUnavourtie = this.Data.Shitts.All()
+                .FirstOrDefault(s => s.Id == id);
+
+            // check if shitt isn't already unfavourtited for this user
+            List<string> favouritesList = shittToUnavourtie.UsersFavourite.Select(f => f.UserName).ToList();
+            bool shittIsFavourite = favouritesList.Contains(currentUser.UserName) ? true : false;
+
+            if (shittIsFavourite)
+            {
+                shittToUnavourtie.UsersFavourite.Remove(currentUser);
+                this.Data.SaveChanges();
+                ViewData["id"] = id;
+
+                return this.PartialView("_FavouriteShittButtonPartial");
+            }
+
+            return JavaScript("window.location = '/Home/error'");
+        }
+
+        private void DeleteShittPhoto(string path)
+        {
+            // delete image from file system
+            string fullPath = Request.MapPath("~" + path);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
         }
     }
 }

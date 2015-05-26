@@ -1,6 +1,8 @@
-﻿@model Shitter.Web.Models.Shitts.ShittViewModel
+﻿@using Microsoft.AspNet.Identity
 
-<div class="shitt-div-container">
+@model Shitter.Web.Models.Shitts.ShittViewModel
+
+<div class="shitt-div-container" id="shitt-@Model.Id">
     <div class="row shitt-div-heading">
         <div class="col-md-3 shittt-user-photo-container">
             <a href="/users/profile/@Model.OwnerUsername">
@@ -15,15 +17,51 @@
             </div>
             <div class="row shitt-div-content">
                 <p class="shitt-content-paragraph">@Model.Content</p>
-              
-                    @if (@Model.ImageDataUrl != null)
-                    {
-                        <div class="center shitt-post-photo-container">
-                            <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive shitt-post-photo" />
-                        </div>
-                    }
-                       
+                @if (@Model.ImageDataUrl != null)
+                {
+                    <div class="center shitt-post-photo-container">
+                        <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive shitt-post-photo" />
+                    </div>
+                }
             </div>
         </div>
     </div>
+    @*ROW WITH BUTTONS*@
+    <div class="row shitt-post-buttons-row">
+        <div class="col-md-3">
+            <span class="glyphicon large-glyphicons glyphicon-pencil" title="comment" aria-hidden="true"></span>
+        </div>
+        @*FAVOURITE/UNFAVOURITE SHITT BUTTON*@
+        <div class="col-md-3">
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (@Model.IsFavourite)
+                {
+                    <span id="favourite-unfavourite-button-@Model.Id">
+                        @Html.Partial("_UnfavouriteShittButtonPartial", new ViewDataDictionary { { "id", Model.Id } })
+                    </span>
+                }
+                else
+                {
+                    <span id="favourite-unfavourite-button-@Model.Id">
+                        @Html.Partial("_FavouriteShittButtonPartial", new ViewDataDictionary { { "id", Model.Id } })
+                    </span>
+                }
+                <span class="text-info" id="shitt-favourites-count-@Model.Id">@Model.FavoureitesCount</span>
+            }
+        </div>
+        @*RENDER DELETE SHITT BUTTON IF USER IS AUTHENTICATED AND OWNER OF SHITT*@
+        <div class="col-md-3">
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.Identity.Name == Model.OwnerUsername)
+                {
+                    <a href="#delete-shitt" role="button" class="btn btn-sm btn-danger delete-shitt-button" data-toggle="modal" data-backdrop="true" data-id="@Model.Id">
+                        Delete &nbsp;<span class="glyphicon large-glyphicons glyphicon-remove" title="delete" aria-hidden="true"></span>
+                    </a>
+                }
+            }
+        </div>
+    </div>
 </div>
+

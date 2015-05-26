@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Linq.Expressions;
 
     using Shitter.Models;
@@ -24,7 +25,8 @@
                     OwnerName = x.Owner.FullName,
                     OwnerId = x.Owner.Id,
                     FavoureitesCount = x.UsersFavourite.Count,
-
+                    UsersFavourite = x.UsersFavourite.Select(u => u.UserName).ToList(),
+                    IsFavourite = false,
                 };
             }
         }
@@ -48,6 +50,8 @@
 
         public int FavoureitesCount { get; set; }
 
-        //public  IEnumerable<User> UsersFavourite { get; set; }   
+        public bool IsFavourite { get; set; }
+
+        public  IEnumerable<string> UsersFavourite { get; set; }   
     }
 }

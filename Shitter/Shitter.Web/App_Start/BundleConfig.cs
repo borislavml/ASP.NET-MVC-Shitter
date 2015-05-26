@@ -24,15 +24,16 @@ namespace Shitter.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            // custom scripts
+            // custom scripts 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                        "~/Scripts/file-upload.js", 
                        "~/Scripts/text-area-expand.js",
                        "~/Scripts/back-to-top.js",
                        "~/Scripts/ajax-tabs.js",
-                       "~/Scripts/update-follow-list.js",
+                       "~/Scripts/ajax-success-error-calbacks.js",
                        "~/Scripts/edit-and-upload-file.js",
-                        "~/Scripts/top-users-ajax.js"));
+                        "~/Scripts/top-users-ajax.js",
+                        "~/Scripts/delete-comment-like-shitt.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

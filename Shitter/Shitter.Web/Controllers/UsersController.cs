@@ -74,6 +74,13 @@
             int pageNumber = page ?? 1;
 
             PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(userShitts, pageNumber, pageSize);
+
+            var currentUserName = User.Identity.Name;
+            foreach (var item in model)
+            {
+                item.IsFavourite = item.UsersFavourite.Contains(currentUserName);
+            }
+
             return this.View(model);
         }
 
@@ -84,22 +91,19 @@
         {
             var userToUnfollow = this.Data.Users.All()
                 .FirstOrDefault(u => u.Id == id);
-
             var user = this.Data.Users.All()
                 .FirstOrDefault(u => u.UserName == this.UserProfile.UserName);
-            try
+
+            if (this.UserisFollowing(userToUnfollow.UserName))
             {
                 user.Following.Remove(userToUnfollow);
                 this.Data.SaveChanges();
-            }
-            catch (Exception ex)
-            {
+                ViewData["id"] = id;
 
-                return JavaScript("window.location = '/Home/error'");
+                return this.PartialView("_FollowUserPartial");
             }
 
-            ViewData["id"] = id;
-            return this.PartialView("_FollowUserPartial");
+            return JavaScript("window.location = '/Home/error'");
         }
 
         [Authorize]
@@ -109,23 +113,19 @@
         {
             var userToFollow = this.Data.Users.All()
                 .FirstOrDefault(u => u.Id == id);
-
             var user = this.Data.Users.All()
                 .FirstOrDefault(u => u.UserName == this.UserProfile.UserName);
-            try
+
+            if (!this.UserisFollowing(userToFollow.UserName))
             {
                 user.Following.Add(userToFollow);
                 this.Data.SaveChanges();
+
+                ViewData["id"] = id;
+                return this.PartialView("_UnfollowUserPartial");
             }
 
-            catch (Exception ex)
-            {
-
-                return JavaScript("window.location = '/Home/error'");
-            }
-
-            ViewData["id"] = id;
-            return this.PartialView("_UnfollowUserPartial");
+            return JavaScript("window.location = '/Home/error'");
         }
 
         [HttpGet]
@@ -143,12 +143,12 @@
             var followingList = userToGetFollowingList.Following
                 .Select(f => new UserProfileMiniViewModel
                 {
-                   Id = f.Id,
-                   UserName = f.UserName,
-                   FullName =f.FullName,
-                   ImageDataUrl = f.ImageDataUrl,
-                   Summary = f.Summary,
-                   UserIsFollowing = this.UserisFollowing(f.UserName),
+                    Id = f.Id,
+                    UserName = f.UserName,
+                    FullName = f.FullName,
+                    ImageDataUrl = f.ImageDataUrl,
+                    Summary = f.Summary,
+                    UserIsFollowing = this.UserisFollowing(f.UserName),
                 });
 
             int pageSize = PAGE_SIZE_FOLLOWERS;
@@ -157,7 +157,7 @@
             PagedList<UserProfileMiniViewModel> model = new PagedList<UserProfileMiniViewModel>(followingList, pageNumber, pageSize);
 
             ViewData["user-id"] = userToGetFollowingList.Id;
-            return this.PartialView("_UserFollowingPartialView",model);
+            return this.PartialView("_UserFollowingPartialView", model);
         }
 
         [HttpGet]
@@ -167,7 +167,7 @@
                 .FirstOrDefault(u => u.Id == id);
 
             var followersList = userToGetFollowersList.Followers
-                .Select(f => new UserProfileMiniViewModel 
+                .Select(f => new UserProfileMiniViewModel
                 {
                     Id = f.Id,
                     UserName = f.UserName,
@@ -194,7 +194,7 @@
 
             var favouritesList = userToGetFvourtiesList.FavouriteShitts
                 .OrderByDescending(s => s.CreatedOn)
-                .Select(s => new ShittViewModel 
+                .Select(s => new ShittViewModel
                 {
                     Id = s.Id,
                     ImageDataUrl = s.ImageDataUrl,
@@ -205,13 +205,20 @@
                     OwnerUsername = s.Owner.UserName,
                     OwnerName = s.Owner.FullName,
                     OwnerId = s.Owner.Id,
+                    UsersFavourite = s.UsersFavourite.Select(u => u.UserName).ToList(),
                     FavoureitesCount = s.UsersFavourite.Count,
                 });
-                
+
             int pageSize = PAGE_SIZE;
             int pageNumber = page ?? 1;
 
             PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(favouritesList, pageNumber, pageSize);
+            
+            var currentUserName = User.Identity.Name;
+            foreach (var item in model)
+            {
+                item.IsFavourite = item.UsersFavourite.Contains(currentUserName);
+            }
 
             ViewData["user-id"] = userToGetFvourtiesList.Id;
             return this.PartialView("_UserFavouritesPartialView", model);
@@ -220,10 +227,6 @@
         [HttpGet]
         public ActionResult GetTopUsers()
         {
-            //int totalUsersCount = this.Data.Users.All().Count();
-            //int totalShittsCount = this.Data.Shitts.All().Count();
-            //int avarageShittsCount = totalShittsCount / totalUsersCount;
-
             var topUsersList = this.Data.Users.All()
                 .Select(u => new UserLinkViewModel
                 {
@@ -232,13 +235,9 @@
                     ImageDataUrl = u.ImageDataUrl,
                     ShitsCount = u.PostedShitts.Count(),
                 })
-                .OrderByDescending( u => u.ShitsCount)
+                .OrderByDescending(u => u.ShitsCount)
                 .Take(10)
                 .ToList();
-
-            //ViewBag.TotalUsersCount = totalUsersCount;
-            //ViewBag.TotalShittsCount = totalShittsCount;
-            //ViewBag.AvarageShittsCount = avarageShittsCount;
 
             return this.PartialView("_TopUsersPartialView", topUsersList);
         }

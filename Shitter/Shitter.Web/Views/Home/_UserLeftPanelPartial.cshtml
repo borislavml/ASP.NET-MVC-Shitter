@@ -15,19 +15,19 @@
                 <div class="col-md-4">
                     <a href="/users/profile/@Model.UserName" class="user-shitts-folloers-following-links">
                         <div class="shitts-folloers-following-headings">Shitts</div>
-                        <div class="user-info-counts">@Model.PostedShitts.Count</div>
+                        <div class="user-info-counts" id="user-info-shitts-count">@Model.PostedShitts.Count</div>
                     </a>
                 </div>
                 <div class="col-md-4">
                     <a href="/users/profile/@Model.UserName/#following" class="user-shitts-folloers-following-links">
                         <div class="shitts-folloers-following-headings">Following</div>
-                        <div class="user-info-counts">@Model.Following.Count</div>
+                        <div class="user-info-counts" id="user-info-following-count">@Model.Following.Count</div>
                     </a>
                 </div>
                 <div class="col-md-4">
                     <a href="/users/profile/@Model.UserName/#followers" class="user-shitts-folloers-following-links">
                         <div class="shitts-folloers-following-headings">Followers</div>
-                        <div class="user-info-counts">@Model.Followers.Count</div>
+                        <div class="user-info-counts" id="user-info-followers-count">@Model.Followers.Count</div>
                     </a>
                 </div>
             </div>

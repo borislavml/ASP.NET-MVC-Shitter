@@ -42,6 +42,7 @@
             int pageNumber = page ?? 1;
 
             PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(shitts, pageNumber, pageSize);
+
             return this.View(model);
         }
 
@@ -74,6 +75,7 @@
                          OwnerUsername = match.Owner.UserName,
                          OwnerName = match.Owner.FullName,
                          OwnerId = match.Owner.Id,
+                         UsersFavourite = match.UsersFavourite.Select(u => u.UserName).ToList(),
                          FavoureitesCount = match.UsersFavourite.Count,
                      });
 
@@ -81,6 +83,13 @@
             int pageNumber = page ?? 1;
 
             PagedList<ShittViewModel> model = new PagedList<ShittViewModel>(shitts, pageNumber, pageSize);
+
+            var currentUserName = User.Identity.Name;
+            foreach (var item in model)
+            {
+                item.IsFavourite = item.UsersFavourite.Contains(currentUserName);
+            }
+
             return this.View(model);
         }
 
@@ -189,12 +198,16 @@
 
         private void DeleteUserPhoto()
         {
-            // delete image from file system
-            string fullPath = Request.MapPath("~" + this.UserProfile.ImageDataUrl);
-            if (System.IO.File.Exists(fullPath))
+            if (this.UserProfile.ImageDataUrl != "/Content/Images/no-image.png" )
             {
-                System.IO.File.Delete(fullPath);
+                // delete image from file system
+                string fullPath = Request.MapPath("~" + this.UserProfile.ImageDataUrl);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
             }
         }
+
     }
 }

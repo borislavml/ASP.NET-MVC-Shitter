@@ -1,0 +1,15 @@
+﻿@using (Ajax.BeginForm("UnfavouriteShitt", "Shitts", new { id = ViewData["id"], },
+    new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "favourite-unfavourite-button-" + ViewData["id"],
+        OnSuccess = "decreaseFavouritesCound('" + ViewData["id"] + "')",
+    }))
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-default">
+        <span class="glyphicon large-glyphicons glyphicon-star" title="unfavourite" aria-hidden="true"></span>
+    </button>
+}
+

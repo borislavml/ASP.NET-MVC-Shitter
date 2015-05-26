@@ -174,7 +174,7 @@ body {
 }
 
 .shitt-post-photo-container {
-    width: 100%;
+    width: 90%;
     height:300px;
 }
 
@@ -493,6 +493,15 @@ select {
 
 .search-result-list-item {
     width: 260px !important;
+}
+
+.shitt-post-buttons-row {
+    margin: 5px !important;
+    padding: 5px !important;
+}
+
+.large-glyphicons {
+    font-size: 1.3em !important;
 }
 
 #divProcessing {

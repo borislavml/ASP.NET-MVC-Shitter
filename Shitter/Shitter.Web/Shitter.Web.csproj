@@ -271,6 +271,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\delete-comment-like-shitt.js" />
     <Content Include="Scripts\edit-and-upload-file.js" />
     <Content Include="Scripts\file-upload.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -290,7 +291,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\text-area-expand.js" />
     <Content Include="Scripts\top-users-ajax.js" />
-    <Content Include="Scripts\update-follow-list.js" />
+    <Content Include="Scripts\ajax-success-error-calbacks.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -346,6 +347,9 @@
     <Content Include="Views\Shared\_TopUsersPartialView.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\UserLinkViewModel.cshtml" />
     <Content Include="Views\Shared\_UsersResult.cshtml" />
+    <Content Include="Views\Shared\_DeleteShittModalPartial.cshtml" />
+    <Content Include="Views\Shared\_FavouriteShittButtonPartial.cshtml" />
+    <Content Include="Views\Shared\_UnfavouriteShittButtonPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
