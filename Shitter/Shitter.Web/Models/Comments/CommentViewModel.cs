@@ -1,4 +1,4 @@
-﻿namespace Shitter.Web.Models.Shitts
+﻿namespace Shitter.Web.Models.Comments
 {
     using System;
     using System.Collections.Generic;
@@ -7,39 +7,29 @@
 
     using Shitter.Models;
 
-    public class ShittViewModel
+    public class CommentViewModel
     {
-        public static Expression<Func<Shitt, ShittViewModel>> ViewModel
+        public static Expression<Func<Comment, CommentViewModel>> ViewModel
         {
             get
             {
-                return x => new ShittViewModel
+                return x => new CommentViewModel
                 {
                     Id = x.Id,
-                    ImageDataUrl = x.ImageDataUrl,
                     Content = x.Content,
                     CreatedOn = x.CreatedOn,
-                    Reshitts = x.Reshitts,
                     OwnerImageDataUrl = x.Owner.ImageDataUrl,
                     OwnerUsername = x.Owner.UserName,
                     OwnerName = x.Owner.FullName,
                     OwnerId = x.Owner.Id,
-                    FavoureitesCount = x.UsersFavourite.Count,
-                    UsersFavourite = x.UsersFavourite.Select(u => u.UserName).ToList(),
-                    IsFavourite = false,
-                    ShittCommentsCount = x.Comments.Count,
                 };
             }
         }
         public int Id { get; set; }
 
-        public string ImageDataUrl { get; set; }
-
         public string Content { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public int Reshitts { get; set; }
 
         public string OwnerUsername { get; set; }
 
@@ -48,13 +38,5 @@
         public string OwnerName { get; set; }
 
         public string OwnerId { get; set; }
-
-        public int FavoureitesCount { get; set; }
-
-        public bool IsFavourite { get; set; }
-
-        public int ShittCommentsCount { get; set; }
-
-        public IEnumerable<string> UsersFavourite { get; set; }
     }
 }

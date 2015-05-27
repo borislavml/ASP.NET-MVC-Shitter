@@ -222,6 +222,7 @@
     <Compile Include="Attributes\UniqueUsernameAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
@@ -232,6 +233,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Comments\CommentViewModel.cs" />
+    <Compile Include="Models\Comments\PostCommentViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Shitts\PostShitViewModel.cs" />
     <Compile Include="Models\Shitts\ShittViewModel.cs" />
@@ -340,7 +343,6 @@
     <Content Include="Views\Shared\_UserFollowersPartialView.cshtml" />
     <Content Include="Views\Shared\_UserFavouritesPartialView.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\UserProfileMiniViewModel.cshtml" />
-    <Content Include="Views\Shared\_PostShittModalPartial.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
     <Content Include="Views\Shared\_UserPostShittPartial.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
@@ -350,6 +352,12 @@
     <Content Include="Views\Shared\_DeleteShittModalPartial.cshtml" />
     <Content Include="Views\Shared\_FavouriteShittButtonPartial.cshtml" />
     <Content Include="Views\Shared\_UnfavouriteShittButtonPartial.cshtml" />
+    <Content Include="Views\Shared\_ViewFavouritesModalPartial.cshtml" />
+    <Content Include="Views\Shared\_ShittFavouritesListPartial.cshtml" />
+    <Content Include="Views\Shared\_PostShittCommentPartial.cshtml" />
+    <Content Include="Views\Shared\_ShittCommentsListPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentViewModel.cshtml" />
+    <Content Include="Views\Shared\_NewPostedCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

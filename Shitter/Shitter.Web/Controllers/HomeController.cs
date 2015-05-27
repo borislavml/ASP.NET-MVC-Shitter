@@ -35,6 +35,8 @@
             }
 
             var shitts = this.Data.Shitts.All()
+                .Include(s => s.Owner)
+                .Include(s => s.UsersFavourite)
                 .Select(ShittViewModel.ViewModel)
                 .OrderByDescending(s => s.CreatedOn);
 
@@ -60,7 +62,7 @@
             // get shitts owned by user's following
             var matches = from shitt in this.Data.Shitts.All()
                           where userFollowing.Contains(shitt.Owner.UserName)
-                          orderby shitt.CreatedOn descending
+                          orderby shitt.CreatedOn descending                         
                           select shitt;
 
             // cast matches to ShittViewModel
@@ -77,6 +79,7 @@
                          OwnerId = match.Owner.Id,
                          UsersFavourite = match.UsersFavourite.Select(u => u.UserName).ToList(),
                          FavoureitesCount = match.UsersFavourite.Count,
+                         ShittCommentsCount = match.Comments.Count,
                      });
 
             int pageSize = PAGE_SIZE;
@@ -92,7 +95,6 @@
 
             return this.View(model);
         }
-
 
         [HttpGet]
         [Authorize]
@@ -208,6 +210,5 @@
                 }
             }
         }
-
     }
 }

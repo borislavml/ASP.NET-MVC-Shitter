@@ -33,6 +33,11 @@
             get { return this.GetRepository<Shitt>(); }
         }
 
+        public IRepository<Comment> Comments
+        {
+            get { return this.GetRepository<Comment>(); }
+        }
+
         public IRepository<Message> Messages
         {
             get { return this.GetRepository<Message>(); }

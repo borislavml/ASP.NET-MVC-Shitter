@@ -19,21 +19,21 @@
         private ICollection<Shitt> postedShitts;
         private ICollection<Shitt> favouriteShitts;
 
-        private ICollection<Notification> notificatioins;
-
         private ICollection<Message> sentMessages;
         private ICollection<Message> receivedMessages;
+
+        private ICollection<Comment> comments;
+
+        private ICollection<Notification> notificatioins;
 
         public User()
         {
             this.followers = new HashSet<User>();
             this.following = new HashSet<User>();
-
             this.postedShitts = new HashSet<Shitt>();
             this.favouriteShitts = new HashSet<Shitt>();
-
+            this.comments = new HashSet<Comment>();
             this.notificatioins = new HashSet<Notification>();
-
             this.sentMessages = new HashSet<Message>();
             this.receivedMessages = new HashSet<Message>();
         }
@@ -89,6 +89,12 @@
         {
             get { return this.favouriteShitts; }
             set { this.favouriteShitts = value; }
+        }
+
+        public virtual ICollection<Comment> Comments
+        {
+            get { return this.comments; }
+            set { this.comments = value; }
         }
 
         public virtual ICollection<Notification> Notifications 

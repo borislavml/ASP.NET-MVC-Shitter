@@ -28,11 +28,19 @@
     </div>
     @*ROW WITH BUTTONS*@
     <div class="row shitt-post-buttons-row">
-        <div class="col-md-3">
-            <span class="glyphicon large-glyphicons glyphicon-pencil" title="comment" aria-hidden="true"></span>
+        @*SHITT COMMENTS BUTTON*@
+        <div class="col-md-4">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <button class="show-shitt-comments-link btn btn-default shitt-row-button" data-id="@Model.Id">
+                    <span class="glyphicon large-glyphicons glyphicon-pencil" title="comment" aria-hidden="true"></span>
+                    <span id="shitt-comments-count-@Model.Id" class="text-info underline-text">@Model.ShittCommentsCount</span>
+                    <span class="text-info underline-text">comments</span>
+                </button>
+            }
         </div>
         @*FAVOURITE/UNFAVOURITE SHITT BUTTON*@
-        <div class="col-md-3">
+        <div class="col-md-4">
             @if (User.Identity.IsAuthenticated)
             {
                 if (@Model.IsFavourite)
@@ -47,7 +55,11 @@
                         @Html.Partial("_FavouriteShittButtonPartial", new ViewDataDictionary { { "id", Model.Id } })
                     </span>
                 }
-                <span class="text-info" id="shitt-favourites-count-@Model.Id">@Model.FavoureitesCount</span>
+                @*VIEW USERS WHO LIKE SHITT BUTTON*@
+                <a href="#view-favourites" data-toggle="modal" data-backdrop="true" data-id="@Model.Id">
+                    <span class="text-info" id="shitt-favourites-count-@Model.Id">@Model.FavoureitesCount</span>
+                    <span>stars</span>
+                </a>
             }
         </div>
         @*RENDER DELETE SHITT BUTTON IF USER IS AUTHENTICATED AND OWNER OF SHITT*@
@@ -65,3 +77,15 @@
     </div>
 </div>
 
+@*SHITT COMMENTS*@
+<div class="shitt-comments-div-container" id="shitt-comments-container-@Model.Id">
+    @Html.Partial("_PostShittCommentPartial", new ViewDataDictionary { { "id", Model.Id } })
+    <div id="current-posted-comment-div-@Model.Id">
+    </div>
+    <div id="shitt-comments-list-div-@Model.Id">
+        <img src="~/Content/Images/loading-ajax.gif" class="img-responsive center" />
+    </div>
+    <div class="row hide-comment-div">
+        <a href="" class="pull-right close-shitt-comments-div" data-id="@Model.Id">Hide</a>
+    </div>
+</div>

@@ -1,10 +1,7 @@
 ﻿function updateFollowersListUnfollowBtnClicked(id) {
-    var userViewing = $("#current-user-name").data("name")
-    var pathname = window.location.pathname;
-    var params = pathname.split('/');
-    var paramsUser = params[3];
+    var updateView = userIsInTabsMenu();
 
-    if (userViewing !== null && (userViewing == paramsUser)) {
+    if (updateView) {
         //$("#user-mini-" + id).remove();
         var followingCount = $("#following-tab-count").text();
         var newFollowersCount = parseInt(followingCount) - 1;
@@ -13,12 +10,9 @@
 }
 
 function updateFollowersListFollowBtnClicked(id) {
-    var userViewing = $("#current-user-name").data("name")
-    var pathname = window.location.pathname;
-    var params = pathname.split('/');
-    var paramsUser = params[3];
+    var updateView = userIsInTabsMenu();
 
-    if (userViewing !== null && (userViewing == paramsUser)) {
+    if (updateView) {
         var followingCount = $("#following-tab-count").text();
         var newFollowersCount = parseInt(followingCount) + 1;
         $("#following-tab-count").text(newFollowersCount);
@@ -28,6 +22,7 @@ function updateFollowersListFollowBtnClicked(id) {
 function removeDeletedShitt(data) {
     $('#delete-shitt').modal('hide');
     $('#shitt-' + data).remove();
+    $('#shitt-comments-container-' + data).remove();
 
     var pathName = window.location.pathname;
     if (pathName.indexOf('/Home/Dashboard') >= 0) {
@@ -78,4 +73,15 @@ function userIsInTabsMenu() {
     var paramsUser = params[3];
 
     return (userViewing !== null && (userViewing == paramsUser));
+}
+
+function increseCommentsCount(id) {
+    $('.shitt-comment-textarea').val('');
+    var commentsCount = $('#shitt-comments-count-' + id).text();
+    var newCommentsCount = parseInt(commentsCount) + 1;
+    $('#shitt-comments-count-' + id).text(newCommentsCount);
+}
+
+function goToErrorPage() {
+    window.location = "/Home/Error";
 }

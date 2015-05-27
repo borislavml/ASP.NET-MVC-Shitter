@@ -207,7 +207,7 @@ body {
 }
 
  textarea {
-    max-width: 500px !important;
+    max-width: 540px !important;
 }
 
 #post-shitt-buttons {
@@ -501,7 +501,73 @@ select {
 }
 
 .large-glyphicons {
-    font-size: 1.3em !important;
+    font-size: 1.0em !important;
+}
+
+.inlie-block-ajax-form {
+    display: inline-block;
+}
+
+.user-modal-link-photo-container {
+    height: 40px;
+    width: 70px;
+    padding-right: 0px !important;
+}
+
+.user-modal-link-photo {
+    border: 3px solid white;
+    width: auto;
+    height: 95%;
+    border-radius: 4px;
+}
+
+.shitt-comments-div-container {
+    padding: 5px;
+    border: 1px solid #F0F0F0;
+    background-color: #F6F7F8;
+    margin-bottom: 5px !important;
+    display: none;
+}
+
+
+.shitt-row-button:hover {
+    background-color: white !important;
+}
+
+.shitt-row-button:hover {
+    background-color: white !important;
+}
+
+.shitt-comment-textarea {
+    width: 100%;
+    padding: 5px !important;
+}
+
+.post-comment-ajax-form {
+    width: 100%;
+    display: inline-block;
+}
+
+.shitt-comment-paragraph {
+    word-break: break-all;
+    text-align: justify;
+}
+
+.shitt-comment-div-container {
+    border-top: 1px solid #E9EAED;
+    border-bottom: 1px solid #E9EAED;
+    margin: 0px !important;
+}
+
+.hide-comment-div {
+    margin:0px !important;
+}
+.modal .modal-dialog { 
+    width:35%;
+}
+
+.modal .modal-dialog .modal-body{ 
+    padding: 0px !important;
 }
 
 #divProcessing {

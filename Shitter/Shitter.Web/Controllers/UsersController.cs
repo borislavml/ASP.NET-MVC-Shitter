@@ -66,6 +66,8 @@
             }
 
             var userShitts = this.Data.Shitts.All()
+                .Include(s => s.Owner)
+                .Include(s => s.UsersFavourite)
                 .Where(s => s.OwnerId == user.Id)
                 .Select(ShittViewModel.ViewModel)
                 .OrderByDescending(s => s.CreatedOn);
@@ -207,6 +209,7 @@
                     OwnerId = s.Owner.Id,
                     UsersFavourite = s.UsersFavourite.Select(u => u.UserName).ToList(),
                     FavoureitesCount = s.UsersFavourite.Count,
+                    ShittCommentsCount = s.Comments.Count,
                 });
 
             int pageSize = PAGE_SIZE;

@@ -15,6 +15,7 @@
         private DateTime createdOn;
 
         private ICollection<User> usersFavourite;
+        private ICollection<Comment> comments;
 
         public Shitt()
         {
@@ -23,6 +24,7 @@
             this.CreatedOn = DateTime.Now;
 
             this.usersFavourite = new HashSet<User>();
+            this.comments = new HashSet<Comment>();
         }
 
         public int Id { get; set; }
@@ -65,6 +67,12 @@
         {
             get { return this.usersFavourite; }
             set { this.usersFavourite = value; }
+        }
+
+        public virtual ICollection<Comment> Comments
+        {
+            get { return this.comments; }
+            set { this.comments = value; }
         }
     }
 }

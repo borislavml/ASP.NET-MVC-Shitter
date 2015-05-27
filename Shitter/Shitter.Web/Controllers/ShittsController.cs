@@ -11,6 +11,7 @@
     using Shitter.Data.UnitOfWork;
     using Shitter.Models;
     using Shitter.Web.Models.Shitts;
+    using Shitter.Web.Models.Users;
 
     public class ShittsController : BaseController
     {
@@ -139,6 +140,25 @@
             }
 
             return JavaScript("window.location = '/Home/error'");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetShittFavourites(int id)
+        {
+            var shitt= this.Data.Shitts.All()
+                .FirstOrDefault(s => s.Id == id);
+
+            var shittFavouritesList = shitt.UsersFavourite
+                .Select(u => new UserLinkViewModel
+                    {
+                        UserName = u.UserName,
+                        FullName = u.FullName,
+                        ImageDataUrl = u.ImageDataUrl,
+                    }).ToList();
+
+
+            return this.PartialView("_ShittFavouritesListPartial", shittFavouritesList);
         }
 
         private void DeleteShittPhoto(string path)

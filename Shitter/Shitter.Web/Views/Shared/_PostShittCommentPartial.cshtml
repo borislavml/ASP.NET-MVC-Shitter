@@ -1,0 +1,31 @@
+﻿@model Shitter.Web.Models.Comments.PostCommentViewModel
+
+<div class="post-shitt-comment-div">
+
+    @using (Ajax.BeginForm("PostComment", "Comments", null,
+    new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertBefore,
+        UpdateTargetId = "current-posted-comment-div-" + ViewData["id"],
+        OnSuccess = "increseCommentsCount('" + ViewData["id"] + "')",
+        OnFailure = "goToErrorPage",
+    }, new { @class = "post-comment-ajax-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+            @Html.TextAreaFor(m => m.Content, new { @class = "shitt-comment-textarea", rows = 2, placeholder = "Write a comment" })
+            @*<textarea placeholder="Write a comment" rows="2" class="shitt-comment-textarea" name="Content"></textarea>*@
+        </div>
+
+        <div class="col-md-12">
+            <input type="hidden" name="ShittId" value="@ViewData["id"]">
+            <span class="shitt-comment-size-alert text-danger">
+                @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+            </span>
+            <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post Comment" />
+        </div>
+
+    }
+
+</div>

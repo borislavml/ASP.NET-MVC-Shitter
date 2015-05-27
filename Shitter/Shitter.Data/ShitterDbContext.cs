@@ -18,6 +18,8 @@
 
         public IDbSet<Shitt> Shitts { get; set; }
 
+        public IDbSet<Comment> Comments { get; set; }
+
         public IDbSet<Notification> Notifications { get; set; }
 
         public static ShitterDbContext Create()

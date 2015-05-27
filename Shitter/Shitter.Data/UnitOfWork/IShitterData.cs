@@ -9,6 +9,8 @@
 
         IRepository<Shitt> Shitts { get; }
 
+        IRepository<Comment> Comments { get; }
+
         IRepository<Message> Messages { get; }
 
         IRepository<Notification> Notifications { get; }

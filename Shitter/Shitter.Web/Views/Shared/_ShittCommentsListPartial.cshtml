@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Activities.Expressions
+
+@model  IEnumerable<Shitter.Web.Models.Comments.CommentViewModel>
+
+<div class="shitt-comments-list">
+    @if (Model.Any())
+    {
+        @Html.DisplayForModel()
+    }
+</div>  

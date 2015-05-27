@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Activities.Expressions
+
+@model  IEnumerable<Shitter.Web.Models.Users.UserLinkViewModel>
+
+<div class="list-group">
+
+    @foreach (var user in Model)
+    {
+        <a href="/Users/Profile/@user.UserName" class="list-group-item ">
+            <div class="row search-result-div-row">
+                <div class="col-md-4 user-modal-link-photo-container">
+                    <img src="@user.ImageDataUrl" alt="shitt image" class="img-responsive user-link-photo" />
+                </div>
+                <div class="col-md-7 user-modal-info">
+                    <span>@user.FullName</span>
+                    <span class="user-tag-name">@@@user.UserName</span>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+

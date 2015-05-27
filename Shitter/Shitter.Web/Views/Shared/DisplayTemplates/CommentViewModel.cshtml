@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNet.Identity
+@model Shitter.Web.Models.Comments.CommentViewModel
+
+<div class="row shitt-comment-div-container" id="comment-@Model.Id">
+    <div class="col-md-3 user-link-photo-container">
+        <a href="/Users/Profile/@Model.OwnerUsername">
+            <img src="@Model.OwnerImageDataUrl" alt="shitt image" class="img-responsive user-link-photo" />
+        </a>
+    </div>
+    <div class="col-md-8">
+        <a href="/Users/Profile/@Model.OwnerUsername" class="user-tag-name">@Model.OwnerName</a>
+        <span class="shitt-date">@Model.CreatedOn.ToString("hh:mm MMM dd, yyyy")</span>
+        <p class="shitt-comment-paragraph">@Model.Content </p>
+    </div>
+</div>
+

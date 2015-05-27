@@ -5,7 +5,7 @@
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "favourite-unfavourite-button-" + ViewData["id"],
         OnSuccess = "decreaseFavouritesCound('" + ViewData["id"] + "')",
-    }))
+    }, new { @class = "inlie-block-ajax-form" }))
 {
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-default">
