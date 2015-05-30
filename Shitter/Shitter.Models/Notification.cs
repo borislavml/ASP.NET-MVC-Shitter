@@ -3,12 +3,19 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using Enums;
+    using System.ComponentModel;
+
     public class Notification
     {
+        private const int DEFAULT_NOTIFICATION_STATUS = 0;
+
+        private NotificationStatus status;
         private DateTime dateSent;
 
         public Notification()
         {
+            this.status = DEFAULT_NOTIFICATION_STATUS;
             this.DateSent = DateTime.Now;
         }
 
@@ -27,9 +34,25 @@
         }
 
         [Required]
-        public string UserId { get; set; }
+        [DefaultValue(DEFAULT_NOTIFICATION_STATUS)]
+        public NotificationStatus Status
+        {
+            get { return this.status; }
+            set { this.status = value; }
+        }
 
-        [Required]
-        public virtual User User { get; set; }
+        public int? ShittId { get; set; }
+
+        public string FollowerName { get; set; }
+
+        public string Type { get; set; }
+
+        public string SenderId { get; set; }
+
+        public virtual User Sender { get; set; }
+
+        public string ReceiverId { get; set; }
+
+        public virtual User Receiver { get; set; }
     }
 }

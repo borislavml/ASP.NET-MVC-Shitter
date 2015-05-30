@@ -19,12 +19,10 @@
         private ICollection<Shitt> postedShitts;
         private ICollection<Shitt> favouriteShitts;
 
-        private ICollection<Message> sentMessages;
-        private ICollection<Message> receivedMessages;
+        private ICollection<Notification> sentNotifications;
+        private ICollection<Notification> recievedNotifications;
 
         private ICollection<Comment> comments;
-
-        private ICollection<Notification> notificatioins;
 
         public User()
         {
@@ -33,9 +31,8 @@
             this.postedShitts = new HashSet<Shitt>();
             this.favouriteShitts = new HashSet<Shitt>();
             this.comments = new HashSet<Comment>();
-            this.notificatioins = new HashSet<Notification>();
-            this.sentMessages = new HashSet<Message>();
-            this.receivedMessages = new HashSet<Message>();
+            this.sentNotifications = new HashSet<Notification>();
+            this.recievedNotifications = new HashSet<Notification>();
         }
 
         [Required]
@@ -97,24 +94,19 @@
             set { this.comments = value; }
         }
 
-        public virtual ICollection<Notification> Notifications 
-        {
-            get { return this.notificatioins; }
-            set { this.notificatioins = value; }
-        }
 
         [InverseProperty("Sender")]
-        public virtual ICollection<Message> SentMessages
+        public virtual ICollection<Notification> SentNotifications
         {
-            get { return this.sentMessages; }
-            set { this.sentMessages = value; }
+            get { return this.sentNotifications; }
+            set { this.sentNotifications = value; }
         }
 
         [InverseProperty("Receiver")]
-        public virtual ICollection<Message> ReceivedMessages
+        public virtual ICollection<Notification> RecievedNotifications
         {
-            get { return this.receivedMessages; }
-            set { this.receivedMessages = value; }
+            get { return this.recievedNotifications; }
+            set { this.recievedNotifications = value; }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

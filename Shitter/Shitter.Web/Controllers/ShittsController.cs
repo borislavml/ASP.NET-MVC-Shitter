@@ -16,7 +16,7 @@
     public class ShittsController : BaseController
     {
         public ShittsController(IShiterData data)
-            :base(data)
+            : base(data)
         {
         }
 
@@ -65,7 +65,7 @@
 
             return this.RedirectToAction("Dashboard", "Home");
         }
-        
+
         [Authorize]
         [HttpDelete]
         [ValidateAntiForgeryToken]
@@ -104,10 +104,29 @@
             // check if shitt isn't already favourtite for this user
             List<string> favouritesList = shittToFavourtie.UsersFavourite.Select(f => f.UserName).ToList();
             bool shittIsFavourite = favouritesList.Contains(currentUser.UserName) ? true : false;
-       
+
             if (!shittIsFavourite)
             {
                 shittToFavourtie.UsersFavourite.Add(currentUser);
+
+                //send notifcation if like is not by owner of shitt
+                if (this.UserProfile.Id != shittToFavourtie.OwnerId)
+                {
+                    var notification = new Notification
+                    {
+                        Content = "liked your shit",
+                        DateSent = DateTime.Now,
+                        SenderId = this.UserProfile.Id,
+                        ReceiverId = shittToFavourtie.OwnerId,
+                        Type = "comment",
+                        ShittId = shittToFavourtie.Id
+                    };
+
+                    this.Data.Notifications.Add(notification);
+                    shittToFavourtie.Owner.RecievedNotifications.Add(notification);
+                    this.UserProfile.SentNotifications.Add(notification);
+                }
+
                 this.Data.SaveChanges();
                 ViewData["id"] = id;
 
@@ -146,7 +165,7 @@
         [Authorize]
         public ActionResult GetShittFavourites(int id)
         {
-            var shitt= this.Data.Shitts.All()
+            var shitt = this.Data.Shitts.All()
                 .FirstOrDefault(s => s.Id == id);
 
             var shittFavouritesList = shitt.UsersFavourite
@@ -159,6 +178,24 @@
 
 
             return this.PartialView("_ShittFavouritesListPartial", shittFavouritesList);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetShittById(int id)
+        {
+            var shittToReturn = this.Data.Shitts.All()
+                .Include(s => s.Owner)
+                .Include(s => s.UsersFavourite)
+                .Where(s => s.Id == id)
+                .Select(ShittViewModel.ViewModel)
+                .FirstOrDefault();
+
+            // check if returned shitt is liked by current user 
+            var currentUserName = this.UserProfile.UserName;
+            shittToReturn.IsFavourite = shittToReturn.UsersFavourite.Contains(currentUserName);
+
+            return this.PartialView("_SingleShittPartialView", shittToReturn);
         }
 
         private void DeleteShittPhoto(string path)

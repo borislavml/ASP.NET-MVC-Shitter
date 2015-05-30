@@ -10,7 +10,7 @@
         @Html.Partial("_UserLeftPanelPartial", (Shitter.Models.User)ViewBag.CurrentUser)
     </div>
     @*CENTER PAGE WITH SHITTS*@
-    <div class="home-page-shitts-containter col-md-6">
+    <div class="home-page-shitts-containter col-md-6" id="home-page-shitts-containter">
         @*DISPLAY POST NEW SHIT FORM*@
         @Html.Partial("_UserPostShittPartial", new ViewDataDictionary { { "image", ViewBag.UserImage } })
         @*DISPLAY ALL SHITTS*@
@@ -19,7 +19,7 @@
         {
             <div class="center"><h4 class="text-center">You're not following anyone yet.</h4></div>
         }
-        else 
+        else
         {
             @*PAGINATION*@
             <div class="center pagination-div ">
@@ -27,6 +27,7 @@
             </div>
         }
     </div>
+
     @*RIGHT SIDE BAR*@
     <div class="right-panel-container col-md-3">
         @Html.Partial("_RightSidePanelPartial")

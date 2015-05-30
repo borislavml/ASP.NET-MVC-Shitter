@@ -28,6 +28,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult PostComment(PostCommentViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 var comment = new Comment
@@ -38,8 +39,30 @@
                     OwnerId = this.UserProfile.Id,
                 };
 
-                this.Data.Comments.Add(comment);
+                this.Data.Comments.Add(comment); 
                 this.UserProfile.Comments.Add(comment);
+
+                // send notification if comment is not by owner of shitt
+                var shittToBeCommeted = this.Data.Shitts.All()
+                    .FirstOrDefault(s => s.Id == model.ShittId);
+
+                if (this.UserProfile.Id != shittToBeCommeted.OwnerId )
+                {
+                    var notification = new Notification
+                    {
+                        Content = "commented on your shit",
+                        DateSent = DateTime.Now,
+                        SenderId = this.UserProfile.Id,
+                        ReceiverId = shittToBeCommeted.OwnerId,
+                        Type = "comment",
+                        ShittId = shittToBeCommeted.Id
+                    };
+
+                    this.Data.Notifications.Add(notification);
+                    shittToBeCommeted.Owner.RecievedNotifications.Add(notification);
+                    this.UserProfile.SentNotifications.Add(notification);
+                }
+
                 this.Data.SaveChanges();
 
                 var commentToReturn = new CommentViewModel

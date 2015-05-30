@@ -26,16 +26,16 @@
         });
     })
 
-    ////  enable link to tab
-    //var url = document.location.toString();
-    //if (url.match('#')) {
-    //    $('.nav-tabs a[href=#' + url.split('#')[1] + ']').tab('show');
-    //}
+    // AJAX call to get notifications list
+    $('#get-notifications-list').click(function (event) {
+        event.preventDefault();
 
-    //// Change hash for page-reload
-    //$('.nav-tabs a').on('shown.bs.tab', function (e) {
-    //    window.location.hash = e.target.hash;
-    //})
+        var url = "/Notifications/GetNotificationsList";
+        $.get(url, null, function (data) {
+            $("#notifications-list-div").html(data);
+            $("#notifications-list-div").slideDown(500);
+        });
+    })
 
     if (window.location.hash != "") {
         $(window.location.hash + '-tab').click();

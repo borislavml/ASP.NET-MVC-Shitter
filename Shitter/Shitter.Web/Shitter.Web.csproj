@@ -236,6 +236,7 @@
     <Compile Include="Models\Comments\CommentViewModel.cs" />
     <Compile Include="Models\Comments\PostCommentViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notifications\NotificationViewModel.cs" />
     <Compile Include="Models\Shitts\PostShitViewModel.cs" />
     <Compile Include="Models\Shitts\ShittViewModel.cs" />
     <Compile Include="Models\Users\UserEditProfileViewModel.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\notifications.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -296,7 +298,9 @@
     <Content Include="Scripts\top-users-ajax.js" />
     <Content Include="Scripts\ajax-success-error-calbacks.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -358,6 +362,10 @@
     <Content Include="Views\Shared\_ShittCommentsListPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CommentViewModel.cshtml" />
     <Content Include="Views\Shared\_NewPostedCommentPartial.cshtml" />
+    <Content Include="Views\Shared\_LargeImageModalPartial.cshtml" />
+    <Content Include="Views\Shared\_NotificationsListPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NotificationViewModel.cshtml" />
+    <Content Include="Views\Shared\_SingleShittPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

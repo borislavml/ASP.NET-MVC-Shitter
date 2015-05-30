@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNet.Identity
+@model Shitter.Web.Models.Notifications.NotificationViewModel
+
+<a href="" class="list-group-item notification-list-item" id="notification-@Model.Id" data-type="@Model.NotificationType" data-follower="@Model.FollowerName" data-shittid="@Model.ShittId" data-id="@Model.Id">
+    <div class="row ">
+        <div class="notification-link-photo-container col-md-2">
+            <img src="@Model.SenderImageDataUrl" class="img-responsive user-link-photo" />
+        </div>
+        <div class="col-md-8">
+            <span class="user-tag-name">@Model.SenderUserName</span><br /> @Model.Content<br />
+            <span class="shitt-date"><strong>@Model.DateSent.ToString("hh:mm MMM dd, yyyy")</strong></span>
+             
+        </div>
+    </div>
+</a>
+
+

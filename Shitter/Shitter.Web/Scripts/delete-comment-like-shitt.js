@@ -1,10 +1,10 @@
-﻿$('.delete-shitt-button').click(function () {
+﻿$(document).on('click', '.delete-shitt-button', function () {
     var shittId = $(this).data('id');
     $('#hidden-input-id').val(shittId);
 });
 
 // get shitt likes
-$('a[href="#view-favourites"]').click(function () {
+$(document).on('click', 'a[href="#view-favourites"]', function () {
     var shittId = $(this).data('id');
 
     $.ajax({
@@ -20,7 +20,7 @@ $('a[href="#view-favourites"]').click(function () {
     });
 });
 
-$('.show-shitt-comments-link').click(function () {
+$(document).on('click', '.show-shitt-comments-link', function () {
     // show comment form
     var shittId = $(this).data('id');
     $('#shitt-comments-container-' + shittId).slideDown(500);
@@ -42,10 +42,16 @@ $('.show-shitt-comments-link').click(function () {
     });
 });
 
-$('.close-shitt-comments-div').click(function (event) {
+$(document).on('click', '.close-shitt-comments-div', function () {
     event.preventDefault();
     var shittId = $(this).data('id');
     $('#shitt-comments-container-' + shittId).slideUp(300);
+});
+
+// large-image-modal
+$(document).on('click', '.large-image-popup', function () {
+    var imageDatUrl = $(this).data('image');
+    $('#popup-picture-modal').attr('src', imageDatUrl);
 });
 
 

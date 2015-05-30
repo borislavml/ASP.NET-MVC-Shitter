@@ -79,6 +79,7 @@
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Enums\MessageStatus.cs" />
+    <Compile Include="Enums\NotificationStatus.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />

@@ -33,7 +33,8 @@ namespace Shitter.Web
                        "~/Scripts/ajax-success-error-calbacks.js",
                        "~/Scripts/edit-and-upload-file.js",
                         "~/Scripts/top-users-ajax.js",
-                        "~/Scripts/delete-comment-like-shitt.js"));
+                        "~/Scripts/delete-comment-like-shitt.js",
+                         "~/Scripts/notifications.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

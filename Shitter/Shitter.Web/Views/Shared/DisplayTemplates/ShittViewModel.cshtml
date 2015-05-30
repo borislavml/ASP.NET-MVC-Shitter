@@ -20,7 +20,9 @@
                 @if (@Model.ImageDataUrl != null)
                 {
                     <div class="center shitt-post-photo-container">
-                        <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive shitt-post-photo" />
+                        <a href="#large-image" class="large-image-popup" data-toggle="modal" data-backdrop="true" data-image="@Model.ImageDataUrl">
+                            <img src="@Model.ImageDataUrl" alt="shitt image" class="img-responsive shitt-post-photo" />
+                        </a>
                     </div>
                 }
             </div>
@@ -29,7 +31,7 @@
     @*ROW WITH BUTTONS*@
     <div class="row shitt-post-buttons-row">
         @*SHITT COMMENTS BUTTON*@
-        <div class="col-md-4">
+        <div class="col-md-4 pull-left">
             @if (User.Identity.IsAuthenticated)
             {
                 <button class="show-shitt-comments-link btn btn-default shitt-row-button" data-id="@Model.Id">
@@ -40,7 +42,7 @@
             }
         </div>
         @*FAVOURITE/UNFAVOURITE SHITT BUTTON*@
-        <div class="col-md-4">
+        <div class="col-md-4 pull-left">
             @if (User.Identity.IsAuthenticated)
             {
                 if (@Model.IsFavourite)
@@ -63,12 +65,12 @@
             }
         </div>
         @*RENDER DELETE SHITT BUTTON IF USER IS AUTHENTICATED AND OWNER OF SHITT*@
-        <div class="col-md-3">
+        <div class="col-md-3 pull-left">
             @if (User.Identity.IsAuthenticated)
             {
                 if (User.Identity.Name == Model.OwnerUsername)
                 {
-                    <a href="#delete-shitt" role="button" class="btn btn-sm btn-danger delete-shitt-button" data-toggle="modal" data-backdrop="true" data-id="@Model.Id">
+                    <a href="#delete-shitt" role="button" class="btn btn-sm btn-default delete-shitt-button" data-toggle="modal" data-backdrop="true" data-id="@Model.Id">
                         Delete &nbsp;<span class="glyphicon large-glyphicons glyphicon-remove" title="delete" aria-hidden="true"></span>
                     </a>
                 }

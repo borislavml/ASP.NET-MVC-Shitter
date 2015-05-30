@@ -1,4 +1,4 @@
-﻿/*@import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic-ext);*/
+﻿@import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic-ext);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic-ext);
 
 body {
@@ -40,6 +40,10 @@ body {
     font-size: 26px;
 }
 
+#about-page-heading {
+    color: #5D9FCF !important;
+    font-family: 'Lobster', cursive;
+}
 .post-shitt-navbar-button {
     color: white !important;
     font-weight: bolder;
@@ -283,6 +287,11 @@ select {
 .user-left-panel-div {
     border-radius: 10px;
     line-height: 30px;
+}
+
+.user-manage-panel {
+    margin-top: 10px;
+    padding: 0px !important;
 }
 
 .user-left-pannel-photo-container {
@@ -562,12 +571,45 @@ select {
 .hide-comment-div {
     margin:0px !important;
 }
-.modal .modal-dialog { 
+
+.modal-small .modal-dialog-small { 
     width:35%;
 }
 
-.modal .modal-dialog .modal-body{ 
+.modal-small .modal-dialog-small .modal-body-small{ 
     padding: 0px !important;
+}
+
+.no-underline-link {
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.no-underline-link:hover {
+     color: #4183c4 !important;
+}
+
+.label-as-badge {
+    border-radius: 1em;
+}
+
+#notifications-list-div {
+    display: none;
+}
+
+.notification-link-photo-container {
+    height: 60px;
+    width: 70px;
+    padding-right: 5px !important;
+}
+
+.notifications-panel {
+    margin-top: 0px;
+    padding: 0px !important;
+}
+
+.notification-list-item {
+    padding: 2px !important;
 }
 
 #divProcessing {

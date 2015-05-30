@@ -52,6 +52,7 @@
         public ActionResult Dashboard(int? page)
         {
             var currentUser = this.UserProfile;
+
             ViewBag.CurrentUser = currentUser;
             ViewBag.UserImage = currentUser.ImageDataUrl;
 

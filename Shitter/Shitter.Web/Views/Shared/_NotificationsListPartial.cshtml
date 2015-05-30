@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Activities.Expressions
+
+@model  IEnumerable<Shitter.Web.Models.Notifications.NotificationViewModel>
+
+<div class="list-group">
+    @if (Model.Any())
+    {
+        @Html.DisplayForModel()
+    }
+</div>

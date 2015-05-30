@@ -32,8 +32,37 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+@*SETTINGS AND NOTIFICATIONS*@
+<div class="row user-manage-panel">
+    <div class="col-md-11 user-manage-panel">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="/Manage" class="no-underline-link">
+                    <span class="glyphicon glyphicon-wrench"></span>
+                    <strong>&nbsp; Settings</strong>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="" class="no-underline-link" id="get-notifications-list">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <strong>&nbsp; Notifications</strong>
+                </a>
+                @if (Model.RecievedNotifications.Where(n => n.Status == 0).Count() > 0)
+                {
+                    <span class="label label-danger label-as-badge pull-right" id="notifications-count">
+                        @Model.RecievedNotifications.Where(n => n.Status == 0).Count()
+                    </span>
+                }
+            </li>
+        </ul>
+    </div>
+</div>
 
-
+@*NOTIFICATIONS LIST*@
+<div class="row notifications-panel">
+    <div class="col-md-11 notifications-panel" id="notifications-list-div">
     </div>
 </div>
 

@@ -120,7 +120,22 @@
 
             if (!this.UserisFollowing(userToFollow.UserName))
             {
-                user.Following.Add(userToFollow);
+                user.Following.Add(userToFollow);   
+
+                // send notification to user
+                var notification = new Notification
+                {
+                    Content = "started following you",
+                    DateSent = DateTime.Now,
+                    SenderId = user.Id,
+                    ReceiverId = id,
+                    Type = "follow",
+                    FollowerName = user.UserName
+                };
+
+                this.Data.Notifications.Add(notification);
+                userToFollow.RecievedNotifications.Add(notification);
+                user.SentNotifications.Add(notification);
                 this.Data.SaveChanges();
 
                 ViewData["id"] = id;
