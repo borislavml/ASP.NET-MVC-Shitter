@@ -128,7 +128,7 @@
                     this.DeleteUserPhoto();
 
                     var file = Request.Files[0];
-                    string pathToSave = Server.MapPath("~/Content/Images/Users/");
+                    string pathToSave = Server.MapPath("~/Images/Users/");
                     string filename = Path.GetFileName(file.FileName);
 
                     //ad current datetime to filename for uniqueness and save to file system
@@ -137,14 +137,14 @@
                     file.SaveAs(Path.Combine(pathToSave, filename));
 
                     // ad photo path in database
-                    userToEdit.ImageDataUrl = "/Content/Images/Users/" + filename;                   
+                    userToEdit.ImageDataUrl = "/Images/Users/" + filename;                   
                 }
 
                 // check if image is deleted
                 if (model.ImageDeleted == "yes")
                 {
                     this.DeleteUserPhoto();
-                    userToEdit.ImageDataUrl = "/Content/Images/no-image.png";                 
+                    userToEdit.ImageDataUrl = "/Images/no-image.png";                 
                 }
 
                 this.Data.SaveChanges();
@@ -201,7 +201,7 @@
 
         private void DeleteUserPhoto()
         {
-            if (this.UserProfile.ImageDataUrl != "/Content/Images/no-image.png" )
+            if (this.UserProfile.ImageDataUrl != "/Images/no-image.png" )
             {
                 // delete image from file system
                 string fullPath = Request.MapPath("~" + this.UserProfile.ImageDataUrl);

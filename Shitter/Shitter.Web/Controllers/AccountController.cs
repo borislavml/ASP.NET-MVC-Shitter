@@ -161,14 +161,14 @@
                     UserName = model.Username,
                     Email = model.Email,
                     RegistrationDate = DateTime.Now,
-                    ImageDataUrl = "/Content/Images/no-image.png",
+                    ImageDataUrl = "/Images/no-image.png",
                 };
 
                 // upload image if existing
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
                     var file = Request.Files[0];
-                    string pathToSave = Server.MapPath("~/Content/Images/Users/");
+                    string pathToSave = Server.MapPath("~/Images/Users/");
                     string filename = Path.GetFileName(file.FileName);
 
                     //ad current datetime to filename for uniqueness and save to file system
@@ -177,7 +177,7 @@
                     file.SaveAs(Path.Combine(pathToSave, filename));
 
                     // ad photo path in database
-                    user.ImageDataUrl = "/Content/Images/Users/" + filename;    
+                    user.ImageDataUrl = "/Images/Users/" + filename;    
                 }
 
                 var result = await UserManager.CreateAsync(user, model.Password);

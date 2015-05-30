@@ -39,7 +39,7 @@
                 if (model.ImageDataUrl != null && model.ImageDataUrl.ContentLength > 0)
                 {
                     var file = Request.Files[0];
-                    string pathToSave = Server.MapPath("~/Content/Images/Shitts/");
+                    string pathToSave = Server.MapPath("~/Images/Shitts/");
                     string filename = Path.GetFileName(file.FileName);
 
                     //ad current datetime to filename for uniqueness and save to file system
@@ -48,7 +48,7 @@
                     file.SaveAs(Path.Combine(pathToSave, filename));
 
                     // ad photo path in database
-                    shitt.ImageDataUrl = "/Content/Images/Shitts/" + filename;
+                    shitt.ImageDataUrl = "/Images/Shitts/" + filename;
                 }
 
                 try

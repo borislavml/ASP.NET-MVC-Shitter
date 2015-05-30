@@ -55,7 +55,7 @@ namespace Shitter.Data.Migrations
                     UserName = username,
                     FullName = name,
                     Email = username + "@gmail.com",
-                    ImageDataUrl = "/Content/Images/no-image.png",
+                    ImageDataUrl = "/Images/no-image.png",
                     RegistrationDate = DateTime.Now
                 };
 
@@ -86,7 +86,7 @@ namespace Shitter.Data.Migrations
                     Content = "SHIT #1 FROM SEED",
                     Owner = users.FirstOrDefault(u => u.UserName == "admin"),
                     CreatedOn = DateTime.Now,
-                    ImageDataUrl = "/Content/Images/no-image.png",
+                    ImageDataUrl = "/Images/no-image.png",
                 },
                 new Shitt
                 {
@@ -94,7 +94,7 @@ namespace Shitter.Data.Migrations
                     Content = "SHIT #2 FROM SEED",
                     Owner = users.FirstOrDefault(u => u.UserName == "bot"),
                     CreatedOn = DateTime.Now,
-                    ImageDataUrl = "/Content/Images/no-image.png",
+                    ImageDataUrl = "/Images/no-image.png",
                 },
 
             };

@@ -4,7 +4,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: url(/Content/Images/background.jpg) no-repeat center center fixed !important;
+    background: url(/Images/background.jpg) no-repeat center center fixed !important;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
